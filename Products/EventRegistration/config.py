@@ -16,11 +16,14 @@
 # EventRegistration; if not, write to the Free Software Foundation, Inc., 59
 # Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
+try: # New CMF  
+    from Products.CMFCore import permissions as CMFCorePermissions 
+except ImportError: # Old CMF  
+    from Products.CMFCore import CMFCorePermissions
 
-from Products.CMFCore.CMFCorePermissions import AddPortalContent
 from Products.Archetypes.public import DisplayList
 
-ADD_CONTENT_PERMISSION = AddPortalContent
+ADD_CONTENT_PERMISSION = CMFCorePermissions.AddPortalContent
 PROJECTNAME = "EventRegistration"
 SKINS_DIR = 'skins'
 PROPSHEET_NAME = 'event_registration_properties'
