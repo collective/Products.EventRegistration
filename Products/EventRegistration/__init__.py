@@ -24,28 +24,25 @@ from Products.Archetypes.ArchetypeTool import getType
 from Products.CMFCore.utils import ContentInit
 from Products.CMFCore.DirectoryView import registerDirectory
 
-from config import SKINS_DIR
-from config import GLOBALS
-from config import PROJECTNAME
-from config import ADD_CONTENT_PERMISSION
+from Products.EventRegistration import config
 
 import workflows # sufficient for initialization
 
-registerDirectory(SKINS_DIR, GLOBALS)
+registerDirectory(config.SKINS_DIR, config.GLOBALS)
 
 def initialize(context):
 
-	import Event
-	import Registrant
+	from Products.EventRegistration import event
+	from Products.EventRegistration import registrant
 
 	content_types, constructors, ftis = process_types( 
-			listTypes(PROJECTNAME), 
-			PROJECTNAME
+			listTypes(config.PROJECTNAME), 
+			config.PROJECTNAME
 			)
 	ContentInit(
-		 	PROJECTNAME + ' Content',
+		 	config.PROJECTNAME + ' Content',
 			content_types      = content_types,
-			permission         = ADD_CONTENT_PERMISSION,
+			permission         = config.ADD_CONTENT_PERMISSION,
 			extra_constructors = constructors,
 			fti                = ftis,
 			).initialize(context)

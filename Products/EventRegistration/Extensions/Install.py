@@ -27,7 +27,6 @@ from Products.CMFCore.utils import getToolByName
 from Products.EventRegistration.utils import getPropSheet
 from Products.EventRegistration.utils import NoPropSheetFound
 
-
 from StringIO import StringIO
 
 
@@ -101,11 +100,6 @@ def setupProperties(self, out):
 					'type'  : 'string',
 					'mode'  : 'w'
 				},
-				{	# Should notice be sent to a designated registry address that a new person has registered?
-					'id'    : 'confirm_to_registry_contact', 
-					'type'  : 'boolean',
-					'mode'  : 'w'
-				},
 				{ # The "registry contact" is the email address to which notification
 					# is sent when a user registers for an event.  (It should belong to
 					# the organization hosting the event; do not confuse this with
@@ -127,8 +121,7 @@ def setupProperties(self, out):
 		ps._updateProperty('from_name', config.FROM_NAME)
 		ps._updateProperty('from_address', self.email_from_address)
 		ps._updateProperty('confirm_to_registrant', True)
-		ps._updateProperty('confirm_to_registry_contact', False)
-		ps._updateProperty('default_registry_contact', self.email_from_address)
+		ps._updateProperty('default_registry_contact', '')
 		print >> out, 'Added default properties on %s.' % config.PROPSHEET_NAME
 
 def removePropSheet(self, out):
@@ -140,13 +133,14 @@ def subskinInstall(self, out):
 	install_subskin(self, out, config.GLOBALS)
 
 def archetypesInstall(self, out):
-	installTypes(self, 
-			out,
-			listTypes(config.PROJECTNAME),
-			config.PROJECTNAME
-			)
+	types = listTypes(config.PROJECTNAME)
+	types_to_install = []
+	for t in types:
+		if t['meta_type'] == 'Registrant':
+			types_to_install += [t,]
+	installTypes(self, out, types_to_install, config.PROJECTNAME)
 	print >> out, "Installed content types:"
-	for t in listTypes(config.PROJECTNAME):
+	for t in types_to_install:
 		print >> out, '--  %s' % t['name']
 
 def setupWorkflows(self, out):
@@ -162,6 +156,43 @@ def setupWorkflows(self, out):
 	print >> out, 'Set up "Event Workflow" and "Registrant Workflow"'
 
 
+def quickInstallDependencies(self, out, depends):
+	qi = getToolByName(self, 'portal_quickinstaller')
+	for dependency in depends:
+		if qi.isProductInstalled(dependency):
+			out.write('%s is already installed.\n' % dependency)
+		else:
+			qi.installProduct(dependency)
+			out.write('%s installed.\n' % dependency)
+
+
+def disableATEvent(self, out):
+	'''
+	Makes RegisterableEvent the default event type.
+	'''
+	atool = getToolByName(self, 'archetype_tool')
+	pt = getToolByName(self, 'portal_types')
+	e = getToolByName(pt, 'Event')
+	e.meta_type = 'RegisterableEvent'
+	e.product = 'EventRegistration'
+	e.factory = 'addRegisterableEvent'
+	print >> out, 'Changed portal_types.Event to reference RegisterableEvent instead of ATEvent'
+
+
+
+def restoreATEvent(self, out):
+	'''
+	Makes ATEvent the default event type.
+	'''
+	atool = getToolByName(self, 'archetype_tool')
+	atool.manage_installType('RegisterableEvent', package='EventRegistration', uninstall = True)
+	atool.manage_installType('ATEvent', package='ATContentTypes', uninstall = False)
+	pt = getToolByName(self, 'portal_types')
+	e = getToolByName(pt, 'Event')
+	e.meta_type = 'ATEvent'
+	e.product = 'ATContentTypes'
+	e.factory = 'addATEvent'
+	print >> out, 'Restored ATEvent'
 
 #
 # INSTALL
@@ -169,7 +200,9 @@ def setupWorkflows(self, out):
 
 def install(self):
 	out = StringIO()
+	quickInstallDependencies(self, out, config.DEPENDENCIES)
 	archetypesInstall(self, out)
+	disableATEvent(self, out)
 	subskinInstall(self, out)
 	setupProperties(self, out)
 	setupWorkflows(self, out)
@@ -177,5 +210,6 @@ def install(self):
 
 def uninstall(self):
 	out = StringIO()
+	restoreATEvent(self, out)
 	print >> out, 'Note that uninstalling does NOT remove the property sheet (otherwise, upgrading would be a horrible pain).'
 	return out.getvalue()
