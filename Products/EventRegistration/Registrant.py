@@ -16,7 +16,10 @@
 # EventRegistration; if not, write to the Free Software Foundation, Inc., 59
 # Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-
+try: # New CMF  
+    from Products.CMFCore import permissions as CMFCorePermissions
+except ImportError: # Old CMF  
+    from Products.CMFCore import CMFCorePermissions
 
 from Products.Archetypes.public import BaseSchema
 from Products.Archetypes.public import Schema
@@ -29,7 +32,7 @@ from Products.Archetypes.public import BooleanWidget
 from Products.Archetypes.public import BaseContent
 from Products.Archetypes.public import registerType
 from Products.Archetypes.TemplateMixin import TemplateMixin
-from Products.CMFCore import CMFCorePermissions
+#from Products.CMFCore import CMFCorePermissions
 from Products.CMFCore.utils import getToolByName
 from AccessControl import ClassSecurityInfo
 
