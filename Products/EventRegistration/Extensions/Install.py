@@ -200,12 +200,12 @@ def restoreATEvent(self, out):
 
 def install(self):
 	out = StringIO()
-	quickInstallDependencies(self, out, config.DEPENDENCIES)
+#	quickInstallDependencies(self, out, config.DEPENDENCIES)
 	archetypesInstall(self, out)
 	disableATEvent(self, out)
 	subskinInstall(self, out)
 	setupProperties(self, out)
-	setupWorkflows(self, out)
+#	setupWorkflows(self, out)
 	return out.getvalue()
 
 def uninstall(self):
