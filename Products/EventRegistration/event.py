@@ -33,7 +33,12 @@ __old_name__ = 'Products.EventRegistration.Event'
 
 from types import StringType
 
-from Products.CMFCore.CMFCorePermissions import ModifyPortalContent, View
+try: # New CMF  
+    from Products.CMFCore import permissions as CMFCorePermissions 
+except ImportError: # Old CMF  
+    from Products.CMFCore import CMFCorePermissions
+
+#from Products.CMFCore.CMFCorePermissions import ModifyPortalContent, View
 from Products.CMFCore.utils import getToolByName
 from AccessControl import ClassSecurityInfo
 from DateTime import DateTime
@@ -62,12 +67,12 @@ from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import Reference
 from Products.EventRegistration import config
 from Products.EventRegistration.utils import getPropSheet
 
-from Products.ATContentTypes.config import HAS_PLONE2
+#from Products.ATContentTypes.config import HAS_PLONE2
 from Products.ATContentTypes.configuration import zconf
 from Products.ATContentTypes.content.base import registerATCT
 from Products.ATContentTypes.content.base import ATCTContent
 from Products.ATContentTypes.content.folder import ATFolder
-from Products.ATContentTypes.content.base import updateActions
+#from Products.ATContentTypes.content.base import updateActions
 from Products.ATContentTypes.interfaces import IATEvent
 from Products.ATContentTypes.content.schemata import ATContentTypeSchema
 from Products.ATContentTypes.content.schemata import finalizeATCTSchema
@@ -379,8 +384,7 @@ class RegisterableEvent(ATFolder, ConstrainTypesMixin, CalendarSupportMixin, His
 
 	security	   = ClassSecurityInfo()
 
-	actions = updateActions(ATCTContent, CalendarSupportMixin.actions +
-							HistoryAwareMixin.actions)
+#	actions = updateActions(ATCTContent, CalendarSupportMixin.actions + HistoryAwareMixin.actions)
 
 	security.declareProtected(ChangeEvents, 'setEventType')
 	def setEventType(self, value, alreadySet=False, **kw):
@@ -398,7 +402,7 @@ class RegisterableEvent(ATFolder, ConstrainTypesMixin, CalendarSupportMixin, His
 		if not alreadySet:
 			self.setSubject(value, alreadySet=True, **kw)
 
-	security.declareProtected(ModifyPortalContent, 'setSubject')
+	security.declareProtected(CMFCorePermissions.ModifyPortalContent, 'setSubject')
 	def setSubject(self, value, alreadySet=False, **kw):
 		"""CMF compatibility method
 
@@ -418,7 +422,7 @@ class RegisterableEvent(ATFolder, ConstrainTypesMixin, CalendarSupportMixin, His
 		if not alreadySet:
 			self.setEventType(v, alreadySet=True, **kw)
 
-	security.declareProtected(View, 'getEventTypes')
+	security.declareProtected(CMFCorePermissions.View, 'getEventTypes')
 	def getEventTypes(self):
 		"""fetch a list of the available event types from the vocabulary
 		"""
@@ -467,7 +471,7 @@ class RegisterableEvent(ATFolder, ConstrainTypesMixin, CalendarSupportMixin, His
 					contactEmail=contact_email, contactPhone=contact_phone,
 					eventUrl=event_url)
 
-	security.declareProtected(View, 'post_validate')
+	security.declareProtected(CMFCorePermissions.View, 'post_validate')
 	def post_validate(self, REQUEST=None, errors=None):
 		"""Validates start and end date
 
@@ -494,7 +498,7 @@ class RegisterableEvent(ATFolder, ConstrainTypesMixin, CalendarSupportMixin, His
 			value = self['creation_date']
 		return DT2dt(value)
 
-	security.declareProtected(View, 'start_date')
+	security.declareProtected(CMFCorePermissions.View, 'start_date')
 	start_date = ComputedAttribute(_start_date)
 
 	def _end_date(self):
@@ -503,13 +507,13 @@ class RegisterableEvent(ATFolder, ConstrainTypesMixin, CalendarSupportMixin, His
 			return self.start_date
 		return DT2dt(value)
 
-	security.declareProtected(View, 'end_date')
+	security.declareProtected(CMFCorePermissions.View, 'end_date')
 	end_date = ComputedAttribute(_end_date)
 
 	def _duration(self):
 		return self.end_date - self.start_date
 
-	security.declareProtected(View, 'duration')
+	security.declareProtected(CMFCorePermissions.View, 'duration')
 	duration = ComputedAttribute(_duration)
 
 	def __cmp__(self, other):
@@ -534,7 +538,7 @@ class RegisterableEvent(ATFolder, ConstrainTypesMixin, CalendarSupportMixin, His
 	def __hash__(self):
 		return hash((self.start_date, self.duration, self.title))
 
-	security.declareProtected(ModifyPortalContent, 'update')
+	security.declareProtected(CMFCorePermissions.ModifyPortalContent, 'update')
 	def update(self, event=None, **kwargs):
 		# Clashes with BaseObject.update, so
 		# we handle gracefully
