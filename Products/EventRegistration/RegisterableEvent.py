@@ -46,7 +46,12 @@ from Products.Archetypes.public import registerType
 from Products.Archetypes.TemplateMixin import TemplateMixin
 from Products.Archetypes.VariableSchemaSupport import VariableSchemaSupport
 
-from Products.CMFCore import CMFCorePermissions
+try: # New CMF  
+    from Products.CMFCore import permissions as CMFCorePermissions
+except ImportError: # Old CMF  
+    from Products.CMFCore import CMFCorePermissions
+
+#from Products.CMFCore import CMFCorePermissions
 from Products.CMFCore.utils import getToolByName
 from DateTime import DateTime
 
