@@ -1,0 +1,52 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+
+  <metal:head fill-slot="head_slot">
+    <meta name="robots" content="noindex,follow" />
+  </metal:head>
+
+  <body>
+
+    <div metal:fill-slot="main"
+         tal:define="errors options/state/getErrors;">
+
+      <h1>Send an email to this group</h1>
+
+      <div class="documentDescription">
+       Send an email to registered members of <div tal:content="here/title"></div>
+      </div>
+
+
+     
+
+
+
+<form action=send_feedback>
+
+<input type=hidden name=to_adress
+tal:attributes="value here/allRegEmail;">
+
+<input type=hidden name=from_portal
+tal:attributes="value portal_properties/title;">
+
+From: <input type=text name=from_adress size=40
+tal:attributes="value python: request.get('from_adress', member.getProperty('email'));
+                                         tabindex tabindex/next;"><br>
+
+Subject: <input type=text name=title_subject size=40 tal:attributes="value here/title"><br>
+Message: <textarea name=body rows=10 cols=50>
+</textarea><br>
+<input type=submit value="Send Email">
+
+
+
+</form>
+
+
+
+
+    </div>
+
+  </body>
+</html>

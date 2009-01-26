@@ -1,0 +1,81 @@
+<html 
+	xmlns="http://www.w3.org/1999/xhtml" 
+	xml:lang="en" 
+	lang="en" 
+	metal:use-macro="here/main_template/macros/master" 
+	i18n:domain="EventRegistration">
+
+	<body>
+		<metal:fill_main fill-slot="main">
+			<div:main metal:define-macro="main">
+
+				<h1 class="documentFirstHeading" tal:content="here/title">
+					Event Title
+				</h1>
+
+				<metal:comment tal:condition="not: here/title">
+					I'm not including the description (summary) field in this view, since
+					it should be saying the same thing, only in condensed version.  The
+					description belongs on the front page (or anywhere events are
+					*listed*) only.
+
+					Likewise, location is only used to sync w/ external web
+					calendar, and need not be displayed on the website.
+				</metal:comment>
+
+				<div id="dateSection" tal:define="longdayfmt python:here.longDayFormat()">
+					<span id='startDate' tal:content="python:here.start_date.strftime(longdayfmt)">
+						Tuesday 31 May 1895
+					</span>
+					<span tal:omit-tag="" tal:condition="not:here/ignore_end">
+						<span style="margin-left: 0.6em; margin-right: 0.6em;">
+							-
+						</span>
+						<span id='endDate' tal:content="python:here.end_date.strftime(longdayfmt)">
+							Tuesday 31 May 1895
+						</span>
+					</span>
+				</div>
+				<div id="hourSection" tal:define="hourfmt python:here.hourFormat()" tal:condition="not:here/ignore_hours">
+					<span id='startHour' tal:content="python:here.start_date.strftime(hourfmt)">
+						Tuesday 31 May 1895
+					</span>
+						<span style="margin-left: 0.6em; margin-right: 0.6em;">
+							-
+						</span>
+					<span id='endHour' tal:content="python:here.end_date.strftime(hourfmt)">
+						Tuesday 31 May 1895
+					</span>
+				</div>
+				<div id="scheduleNoteSection" tal:condition="here/use_schedule_note">
+					<span id="scheduleNote" tal:content="here/schedule_note">
+						By appointment only
+					</span>
+				</div>
+
+				<div style="margin-top: 1.5em; margin-bottom: 1.5em; font-style: oblique;" class="summary" tal:content="structure here/summary">
+					Text summary of the event
+				</div>
+
+				<div class="body" tal:content="structure here/full_description">
+					Full (HTML) description of event
+				</div>
+
+				<span class="registrationForm" 
+					tal:define="handle here/handle_registration; 
+					current python: int(here.end()) > int(DateTime());"
+					tal:condition="python: handle and current">
+					<form style="margin-top: 1.5em;" 
+						tal:attributes="action python:here.absolute_url()+'/createObject'"
+						method="POST">
+						<input type="hidden" name="type_name" value="Registrant">
+						<input type="submit" value="Register to attend this event">
+					</form>
+				</span>
+
+
+			</div:main>
+		</metal:fill_main>
+
+	</body>
+</html>

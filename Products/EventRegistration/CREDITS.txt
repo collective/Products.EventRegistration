@@ -1,0 +1,37 @@
+------------------------------------------------------------------------
+PRIMARY DEVELOPERS
+------------------------------------------------------------------------
+
+Jason McVetta <jmcvetta@squaretortoise.com> -- design & implimentation
+
+
+------------------------------------------------------------------------
+CONTRIBUTORS
+------------------------------------------------------------------------
+
+Raphael Ritz <r.ritz@biologie.hu-berlin.de> -- parts of utils.txt
+
++lupa+ <lupa@zurven.com> -- help with letting anon users add registrant objects
+
+Andrew Burkhalter <andrewb@onenw.org> -- diagnosing major packaging bug in 0.1
+
+Dominic Hiles <Dominic.Hiles@bristol.ac.uk> -- giving me a clue why
+EventRegistration doesn't work with portal_factory in plone 2.0.5
+
+Sverre Helge Bolstad <Sverre.Bolstad@student.uib.no> -- added "mail all
+registrants" feature
+
+Ruda Porto Filgueiras <rudazz@gmail.com> -- showing me how to make an
+archetypes save hook, which everyone else said was impossible
+
+
+------------------------------------------------------------------------
+SPECIAL THANKS
+------------------------------------------------------------------------
+
+Raphael Ritz <r.ritz@biologie.hu-berlin.de> -- for the excellent & invaluable
+MySite tutorial, without which I would have been lost.
+
+Christian Simm <christian.simm@swissnex.org) -- my client, for funding the
+development of EventRegistration, and for being patient & understanding of a
+behind-schedule project.

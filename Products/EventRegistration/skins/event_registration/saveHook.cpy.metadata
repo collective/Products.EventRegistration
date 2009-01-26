@@ -1,0 +1,8 @@
+[default]
+title = Save Hook
+
+[validators]
+validators =
+
+[actions]
+action.success.Registrant = redirect_to_action:string:view

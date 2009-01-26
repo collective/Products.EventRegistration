@@ -1,0 +1,96 @@
+<html 
+	xmlns="http://www.w3.org/1999/xhtml" 
+	xml:lang="en" 
+	lang="en" 
+	metal:use-macro="here/main_template/macros/master" 
+	i18n:domain="EventRegistration">
+
+	<body>
+		<metal:fill_main fill-slot="main">
+			<div metal:define-macro="main">
+
+				<h1 class="documentFirstHeading">
+					<metal:firstAndLast tal:content="here/firstAndLast">
+						Name
+					</metal:firstAndLast>
+					has been registered for
+					<metal:parentTitle tal:content="here/parentTitle">
+						Event
+					</metal:parentTitle>
+				</h1>
+
+
+				<p>
+					<metal:honorific tal:content="here/honorific">
+						mr/ms/dr/prof
+					</metal:honorific>
+					<metal:firstAndLast tal:content="here/firstAndLast">
+						First Last
+					</metal:firstAndLast>
+					<br>
+					<metal:jobTitle tal:content="here/job_title">
+						position
+					</metal:jobTitle>,
+					<metal:company tal:content="here/company">
+						company
+					</metal:company>
+					<br>
+					<metal:email tal:content="here/email">
+						name@domain.com
+					</metal:email>
+					<br>
+					<metal:phone tal:content="here/phone">
+						(555) 555-5555
+					</metal:phone>
+				</p>
+				<p>
+					<metal:street tal:content="here/street">
+						123 Main St
+					</metal:street>
+					<br>
+					<metal:city tal:content="here/city">
+						San Francisco
+						</metal:city><metal:cityStateComma tal:condition="here/bothCityAndState">,</metal:cityStateComma>
+					<metal:state tal:content="here/state">
+						California
+					</metal:state>
+					<metal:zip tal:content="here/zip">
+						94111
+					</metal:zip>
+					<br>
+					<metal:website tal:content="here/website">
+						www.mycompany.com
+					</metal:website>
+				</p>
+				<metal:heard_about_hr tal:condition="here/heard_about">
+					<p>
+						<hr>
+						<metal:heard_about tal:content="here/heard_about">
+							how they heard about the event
+						</metal:heard_about>
+					</p>
+				</metal:heard_about_hr>
+				<metal:comments_hr tal:condition="here/comments">
+					<p>
+						<hr>
+						<metal:comments tal:content="here/comments">
+							comments, blah, blah, blah
+						</metal:comments>
+					</p>
+				</metal:comments_hr>
+				<form tal:attributes="action python:here.absolute_url()+'/base_edit'" method="GET"> 
+					<input type="submit" value="Edit">
+				</form>
+				<form 
+					tal:attributes="action python:here.REQUEST.PARENTS[1].absolute_url()+'/createObject'"
+					method="POST">
+					<input type="hidden" name="type_name" value="Registrant">
+					<input type="submit" value="Register another person">
+				</form>
+
+
+			</div>
+		</metal:fill_main>
+
+	</body>
+</html>

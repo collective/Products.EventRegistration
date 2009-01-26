@@ -1,0 +1,74 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US"
+	lang="en-US"
+	i18n:domain="plone"
+	tal:define="
+		errors options/state/getErrors | nothing;
+		Iterator python:modules['Products.Archetypes'].IndexIterator;
+		schematas here/Schemata;
+		fieldsets python:[key for key in schematas.keys() if (key != 'metadata') and (schematas[key].editableFields(here))];
+		default_fieldset python:(not schematas or schematas.has_key('default')) and 'default' or fieldsets[0];
+		fieldset request/fieldset|options/fieldset|default_fieldset;
+		fields python:schematas[fieldset].editableFields(here);
+		dummy python:here.at_isEditable(fields);
+		portal_type python:here.getPortalTypeName().lower().replace(' ', '_');
+		type_name here/getPortalTypeName|here/archetype_name;
+		base_macros here/edit_macros/macros;
+		edit_template python:'%s_edit' % portal_type;
+		edit_macros python:path('here/%s/macros | nothing' % edit_template);
+		header_macro edit_macros/header | header_macro | base_macros/header;
+		typedescription_macro edit_macros/typedescription | typedescription_macro | base_macros/typedescription;
+		body_macro edit_macros/body | body_macro | base_macros/body;
+		footer_macro edit_macros/footer | footer_macro | base_macros/footer;
+		lockable python:hasattr(here, 'wl_isLocked');
+		isLocked python:lockable and here.wl_isLocked();
+		tabindex tabindex|python:Iterator(pos=7000);                    css python:here.getUniqueWidgetAttr(fields, 'helper_css');
+		js python:here.getUniqueWidgetAttr(fields, 'helper_js');
+	">
+
+
+
+<body>
+
+<metal:header metal:define-macro="header">
+	<h1 i18n:translate="heading_edit_item"
+			metal:define-slot="title">
+		Register for
+		<span tal:content="here/parentTitle" tal:omit-tag="">
+			Event Title
+		</span>
+	</h1>
+
+	<div id="archetypes-schemata-links"
+			 tal:condition="fieldsets">
+		<tal:block repeat="set fieldsets">
+			<tal:current condition="python:set == fieldset and fieldsets != ['default']">
+				<strong>[<span tal:content="set" i18n:translate="" />]</strong>
+			</tal:current>
+			<tal:others condition="python:set != fieldset">
+				<a href="#" tal:attributes="href string:${here/absolute_url}/${template/getId}?fieldset=${set}">
+				[<span tal:content="set" i18n:translate="" />]</a>
+			</tal:others>
+		</tal:block>
+	</div>
+	<metal:block define-slot="extra_info" />
+
+	<p class="portalMessage"
+		 tal:condition="isLocked"
+		 i18n:translate="description_webdav_locked">
+		This item is in use by someone else and cannot be modified
+	</p>
+
+	<div id="mandatoryFieldsExplanation" style="margin-top: 0.5em;" >
+		Fields marked with 
+		<img src="/required.gif" tal:attributes="src string:$portal_url/required.gif" alt="(Required)" valign="center" />
+		are mandatory.
+	</div>
+
+</metal:header>
+
+<!-- "created by" byline is inappropriate for a registration screen -->
+<metal:footer define-macro="footer">
+</metal:footer>
+
+</body>
+</html>

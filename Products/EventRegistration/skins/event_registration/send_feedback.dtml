@@ -1,0 +1,8 @@
+<dtml-sendmail smtphost="localhost">
+To: <dtml-var to_adress>
+From: <dtml-var from_portal> - <dtml-var from_adress>
+Subject: <dtml-var title_subject>
+
+<dtml-var body>
+</dtml-sendmail>
+<dtml-call "RESPONSE.redirect('folder_contents?portal_status_message=Email sent !')">

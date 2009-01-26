@@ -1,0 +1,145 @@
+<html 
+	xmlns="http://www.w3.org/1999/xhtml" 
+	xml:lang="en" 
+	lang="en" 
+	tal:define="registrants python:here.getFolderContents()"
+	i18n:domain="EventRegistration">
+
+	<body>
+
+				<h1 class="documentFirstHeading" align="center">
+					Registrants for
+					<span tal:content="here/title">
+						Event Title
+					</span>
+				</h1>
+
+				<h2 class="dateStamp" align="center">
+					as of
+					<span tal:content="python:here.toLocalizedTime(here.ZopeTime(),long_format=1)">
+						March 25, 2005
+					</span>
+				</h2>
+
+				<table border=1>
+					<tr>
+						<td>
+							&nbsp; <!-- honorific /-->
+						</td>
+						<td>
+							<b>First Name</b>
+						</td>
+						<td>
+							<b>Last Name</b>
+						</td>
+						<td>
+							<b>Company</b>
+						</td>
+						<td>
+							<b>Job Title</b>
+						</td>
+						<td>
+							<b>Email</b>
+						</td>
+						<td>
+							<b>Phone Number</b>
+						</td>
+						<td>
+							<b>Street Address</b>
+						</td>
+						<td>
+							<b>City</b>
+						</td>
+						<td>
+							<b>State</b>
+						</td>
+						<td>
+							<b>Zip Code</b>
+						</td>
+						<td>
+							<b>Website</b>
+						</td>
+						<td>
+							<b>Comments</b>
+						</td>
+						<td>
+							<b>Newsletter</b>
+						</td>
+					</tr>
+					<span tal:repeat="reg registrants">
+						<tal:block condition="reg/first_name">
+							<tr>
+								<td tal:content="reg/honorific">
+									Mr
+								</td>
+								<td tal:content="reg/first_name">
+									John
+								</td>
+								<td tal:content="reg/last_name">
+									Doe
+								</td>
+								<td tal:content="reg/company">
+									Megacorp
+								</td>
+								<td tal:content="reg/job_title">
+									CEO
+								</td>
+								<td tal:content="reg/email">
+									doe@megacorp.com
+								</td>
+								<td tal:content="reg/phone" tal:condition="reg/phone">
+									800-555-1234
+								</td>
+								<td tal:condition="not: reg/phone">
+									&nbsp;
+								</td>
+								<td tal:content="reg/street" tal:condition="reg/street">
+									123 Main St
+								</td>
+								<td tal:condition="not: reg/street">
+									&nbsp;
+								</td>
+								<td tal:content="reg/city" tal:condition="reg/city">
+									San Francisco
+								</td>
+								<td tal:condition="not: reg/city">
+									&nbsp;
+								</td>
+								<td tal:content="reg/state" tal:condition="reg/state">
+									California
+								</td>
+								<td tal:condition="not: reg/state">
+									&nbsp;
+								</td>
+								<td tal:content="reg/zip" tal:condition="reg/zip">
+									94111
+								</td>
+								<td tal:condition="not: reg/zip">
+									&nbsp;
+								</td>
+								<td tal:content="reg/website" tal:condition="reg/website">
+									www.megacorp.com
+								</td>
+								<td tal:condition="not: reg/website">
+									&nbsp;
+								</td>
+								<td tal:content="reg/comments" tal:condition="reg/comments">
+									Will there be refreshments?
+								</td>
+								<td tal:condition="not: reg/comments">
+									&nbsp;
+								</td>
+								<td>
+									<span tal:condition="reg/newsletter">
+										X
+									</span>
+								</td>
+							</tr>
+						</tal:block>
+					</span>
+				</table>
+
+
+
+	</body>
+</html>
