@@ -199,14 +199,22 @@ def restoreATEvent(self, out):
 #
 
 def install(self):
-	out = StringIO()
-#	quickInstallDependencies(self, out, config.DEPENDENCIES)
-	archetypesInstall(self, out)
-	disableATEvent(self, out)
-	subskinInstall(self, out)
-	setupProperties(self, out)
-#	setupWorkflows(self, out)
-	return out.getvalue()
+    out = StringIO()
+#   quickInstallDependencies(self, out, config.DEPENDENCIES)
+    archetypesInstall(self, out)
+    disableATEvent(self, out)
+    subskinInstall(self, out)
+    setupProperties(self, out)
+#   setupWorkflows(self, out)
+    # Run import steps for genericsetup profiles.
+    setup_tool = getToolByName(self, 'portal_setup')
+    #originalContext = setup_tool.getImportContextID()
+    originalContext = 'profile-Products.CMFPlone:plone'
+    setup_tool.setImportContext('profile-Products.EventRegistration:default')
+    setup_tool.runAllImportSteps()
+    setup_tool.setImportContext(originalContext)
+    print >> out, "Ran all generic setup import steps for %s." % 'EventRegistration'
+    return out.getvalue()
 
 def uninstall(self):
 	out = StringIO()
