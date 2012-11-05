@@ -1,14 +1,13 @@
 from setuptools import setup, find_packages
 import os
 
-version = '0.6.0'
+version = '1.0.0'
 
 setup(name='Products.EventRegistration',
       version=version,
-      description="an event registration system for plone",
+      description="An event registration system for plone",
       long_description=open("README.txt").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
-      # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
         "Framework :: Plone",
         "Programming Language :: Python",
