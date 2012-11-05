@@ -378,9 +378,9 @@ class RegisterableEvent(ATFolder, ConstrainTypesMixin, CalendarSupportMixin, His
 					  'start_date', 'end_date', 'contact_name', 'contact_email',
 					  'contact_phone', 'event_url')
 
-	__implements__ = (ATCTContent.__implements__, IATEvent,
-					  CalendarSupportMixin.__implements__,
-					  HistoryAwareMixin.__implements__)
+	#__implements__ = (ATCTContent.__implements__, IATEvent,
+	#				  CalendarSupportMixin.__implements__,
+	#				  HistoryAwareMixin.__implements__)
 
 	security	   = ClassSecurityInfo()
 

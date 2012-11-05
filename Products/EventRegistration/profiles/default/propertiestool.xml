@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<object name="portal_properties" meta_type="Plone Properties Tool">
+ <object name="event_registration_properties"
+    meta_type="Plone Property Sheet">
+  <property name="title">EventRegistration properties</property>
+  <property name="event_locations">
+   <element value="Auditorium"/>
+   <element value="Conference Room 1"/>
+   <element value="Conference Room 2"/>
+  </property>
+  <property name="show_location">False</property>
+  <property name="honorifics">
+   <element value="Mr"/>
+   <element value="Ms"/>
+   <element value="Dr"/>
+   <element value="Prof"/>
+  </property>
+  <property name="default_max_participants">100</property>
+  <property name="hour_format">%I:%M%p</property>
+  <property name="short_day_format">%e %b %Y</property>
+  <property name="long_day_format">%A %e %B %Y</property>
+  <property name="confirm_to_registrant">True</property>
+  <property name="message_to_registrant">
+   <element value="Dear %(first_name)s %(last_name)s:"/>
+   <element value="	"/>
+   <element value="You are confirmed to attend &quot;%(event_title)s&quot;."/>
+   <element value=""/>
+   <element value="EVENT BEGINS:"/>
+   <element value="%(event_start)s"/>
+   <element value=""/>
+   <element value="EVENT HOME PAGE (including directions):"/>
+   <element value="%(event_page)s"/>
+   <element value=""/>
+   <element value="EVENT SUMMARY:"/>
+   <element value="%(event_summary)s"/>
+   <element value=""/>
+   <element
+      value="Please note that each participant must register individually. For "/>
+   <element value="additional questions, contact events@swissnex.org."/>
+   <element value=""/>
+   <element value="We look forward to seeing you there."/>
+   <element value=""/>
+   <element value="Best regards,"/>
+   <element value=""/>
+   <element value="The %(website_title)s team"/>
+   <element value="%(website_url)s"/>
+  </property>
+  <property name="from_name">Event registration system</property>
+  <property name="from_address"></property>
+  <property name="default_registry_contact"></property>
+ </object>
+</object>

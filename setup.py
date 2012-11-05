@@ -6,7 +6,7 @@ version = '1.0.0'
 setup(name='Products.EventRegistration',
       version=version,
       description="An event registration system for plone",
-      long_description=open("README.txt").read() + "\n" +
+      long_description=open("README.rst").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       classifiers=[
         "Framework :: Plone",
