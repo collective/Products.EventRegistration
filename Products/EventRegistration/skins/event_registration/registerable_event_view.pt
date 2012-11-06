@@ -24,26 +24,26 @@
 				</metal:comment>
 
 				<div id="dateSection" tal:define="longdayfmt python:here.longDayFormat()">
-					<span id='startDate' tal:content="python:here.start_date.strftime(longdayfmt)">
+					<span id='startDate' tal:content="python:here.start().strftime(longdayfmt)">
 						Tuesday 31 May 1895
 					</span>
 					<span tal:omit-tag="" tal:condition="not:here/ignore_end">
 						<span style="margin-left: 0.6em; margin-right: 0.6em;">
 							-
 						</span>
-						<span id='endDate' tal:content="python:here.end_date.strftime(longdayfmt)">
+						<span id='endDate' tal:content="python:here.end().strftime(longdayfmt)">
 							Tuesday 31 May 1895
 						</span>
 					</span>
 				</div>
 				<div id="hourSection" tal:define="hourfmt python:here.hourFormat()" tal:condition="not:here/ignore_hours">
-					<span id='startHour' tal:content="python:here.start_date.strftime(hourfmt)">
+					<span id='startHour' tal:content="python:here.start().strftime(hourfmt)">
 						Tuesday 31 May 1895
 					</span>
 						<span style="margin-left: 0.6em; margin-right: 0.6em;">
 							-
 						</span>
-					<span id='endHour' tal:content="python:here.end_date.strftime(hourfmt)">
+					<span id='endHour' tal:content="python:here.end().strftime(hourfmt)">
 						Tuesday 31 May 1895
 					</span>
 				</div>
@@ -53,11 +53,11 @@
 					</span>
 				</div>
 
-				<div style="margin-top: 1.5em; margin-bottom: 1.5em; font-style: oblique;" class="summary" tal:content="structure here/summary">
+				<div style="margin-top: 1.5em; margin-bottom: 1.5em; font-style: oblique;" class="summary" tal:content="structure here/Description">
 					Text summary of the event
 				</div>
 
-				<div class="body" tal:content="structure here/full_description">
+				<div class="body" tal:content="structure here/getText">
 					Full (HTML) description of event
 				</div>
 
