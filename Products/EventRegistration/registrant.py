@@ -201,7 +201,8 @@ class Registrant(BaseContent):
     def parentTitle(self):
     	'''Return the title of the Registrants parent Event'''
 
-        # WTF Someone didn't know about aq_parent 
+        # WTF Someone didn't know about aq_parent? Or I never knew about
+        # self.REQUEST.PARENTS. Or both.
 
     	#out = {}
     	#for parent in self.REQUEST.PARENTS:
