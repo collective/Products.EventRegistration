@@ -3,24 +3,24 @@
  <object name="event_registration_properties"
     meta_type="Plone Property Sheet">
   <property name="title">EventRegistration properties</property>
-  <property name="event_locations">
+  <property name="event_locations" type="lines">
    <element value="Auditorium"/>
    <element value="Conference Room 1"/>
    <element value="Conference Room 2"/>
   </property>
-  <property name="show_location">False</property>
-  <property name="honorifics">
+  <property name="show_location" type="boolean">False</property>
+  <property name="honorifics" type="lines">
    <element value="Mr"/>
    <element value="Ms"/>
    <element value="Dr"/>
    <element value="Prof"/>
   </property>
-  <property name="default_max_participants">100</property>
-  <property name="hour_format">%I:%M%p</property>
-  <property name="short_day_format">%e %b %Y</property>
-  <property name="long_day_format">%A %e %B %Y</property>
-  <property name="confirm_to_registrant">True</property>
-  <property name="message_to_registrant">
+  <property name="default_max_participants" type="int">100</property>
+  <property name="hour_format" type="string">%I:%M%p</property>
+  <property name="short_day_format" type="string">%e %b %Y</property>
+  <property name="long_day_format" type="string">%A %e %B %Y</property>
+  <property name="confirm_to_registrant" type="boolean">True</property>
+  <property name="message_to_registrant" type="string">
    <element value="Dear %(first_name)s %(last_name)s:"/>
    <element value="	"/>
    <element value="You are confirmed to attend &quot;%(event_title)s&quot;."/>
@@ -45,8 +45,8 @@
    <element value="The %(website_title)s team"/>
    <element value="%(website_url)s"/>
   </property>
-  <property name="from_name">Event registration system</property>
-  <property name="from_address"></property>
-  <property name="default_registry_contact"></property>
+  <property name="from_name" type="string">Event registration system</property>
+  <property name="from_address" type="string"></property>
+  <property name="default_registry_contact" type="string"></property>
  </object>
 </object>
