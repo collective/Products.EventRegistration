@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<object name="portal_skins" meta_type="Plone Skins Tool" allow_any="False"
+   cookie_persistence="False" default_skin="Sunburst Theme"
+   request_varname="plone_skin">
+ <object name="event_registration" meta_type="Filesystem Directory View"
+    directory="Products.EventRegistration:skins/event_registration"/>
+ <skin-path name="Sunburst Theme">
+  <layer name="event_registration"/>
+ </skin-path>
+</object>
