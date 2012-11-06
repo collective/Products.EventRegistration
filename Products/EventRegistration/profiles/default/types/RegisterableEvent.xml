@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
-<object name="Event"
+<object name="RegisterableEvent"
    meta_type="Factory-based Type Information with dynamic views"
    i18n:domain="plone" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
- <property name="title" i18n:translate="">Event</property>
+ <property name="title" i18n:translate="">RegisterableEvent</property>
  <property name="description"
-    i18n:translate="">Events can be shown in calendars.</property>
+    i18n:translate="">An event that can be registered for.</property>
  <property name="icon_expr"></property>
  <property name="content_meta_type">RegisterableEvent</property>
  <property name="product">EventRegistration</property>

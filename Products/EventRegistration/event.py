@@ -359,7 +359,7 @@ class RegisterableEvent(ATFolder, ConstrainTypesMixin, CalendarSupportMixin, His
 	content_icon   = 'event_icon.gif'
 	meta_type	  = 'RegisterableEvent'
 	portal_type	= 'RegisterableEvent'
-	archetype_name = 'Event'
+	archetype_name = 'RegisterableEvent'
 	default_view   = 'event_view'
 	immediate_view = 'event_view'
 	suppl_views	= ()
