@@ -426,9 +426,11 @@ class RegisterableEvent(ATFolder, ConstrainTypesMixin, CalendarSupportMixin, His
 	def getEventTypes(self):
 		"""fetch a list of the available event types from the vocabulary
 		"""
-		metatool = getToolByName(self, "portal_metadata")
-		events = metatool.listAllowedSubjects(content_type = "Event")
-		return events
+        #metatool = getToolByName(self, "portal_metadata")
+        #events = metatool.listAllowedSubjects(content_type = "Event")
+        #return events
+        return self.portal_catalog.uniqueValuesFor('Subject')
+
 
 	security.declarePrivate('cmf_edit')
 	def cmf_edit(self, title=None, description=None, eventType=None,
