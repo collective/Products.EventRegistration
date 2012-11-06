@@ -32,3 +32,8 @@ And::
 
     $ bin/buildout
     $ bin/plone fg
+
+Setup
+-----
+
+This add-on uses Plone's ``categories`` feature to define event types. As such, before adding a RegisterableEvent you must at least add one other content item first e.g. a Page, and define at least one category in it.
