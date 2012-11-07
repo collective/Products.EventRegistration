@@ -393,14 +393,14 @@ class RegisterableEvent(ATFolder, ConstrainTypesMixin, CalendarSupportMixin, His
         Changing the event type changes also the subject.
         """
         if type(value) is StringType:
-             value = (value,)
+            value = (value,)
         elif not value:
-             # mostly harmless?
-             value = ()
+            # mostly harmless?
+            value = ()
         f = self.getField('eventType')
         f.set(self, value, **kw) # set is ok
         if not alreadySet:
-             self.setSubject(value, alreadySet=True, **kw)
+            self.setSubject(value, alreadySet=True, **kw)
 
     security.declareProtected(CMFCorePermissions.ModifyPortalContent, 'setSubject')
     def setSubject(self, value, alreadySet=False, **kw):
@@ -413,14 +413,14 @@ class RegisterableEvent(ATFolder, ConstrainTypesMixin, CalendarSupportMixin, His
 
         # set the event type to the first subject
         if type(value) is StringType:
-             v = (value, )
+            v = (value, )
         elif value:
-             v = value[0]
+            v = value[0]
         else:
-             v = ()
+            v = ()
 
         if not alreadySet:
-             self.setEventType(v, alreadySet=True, **kw)
+            self.setEventType(v, alreadySet=True, **kw)
 
     security.declareProtected(CMFCorePermissions.View, 'getEventTypes')
     def getEventTypes(self):
@@ -443,30 +443,30 @@ class RegisterableEvent(ATFolder, ConstrainTypesMixin, CalendarSupportMixin, His
               event_url=None):
 
         if effectiveDay and effectiveMo and effectiveYear and start_time:
-             sdate = '%s-%s-%s %s %s' % (effectiveDay, effectiveMo, effectiveYear,
-                                          start_time, startAMPM)
+            sdate = '%s-%s-%s %s %s' % (effectiveDay, effectiveMo, effectiveYear,
+                start_time, startAMPM)
         elif start_date:
-             if not start_time:
-                 start_time = '00:00:00'
-             sdate = '%s %s' % (start_date, start_time)
+            if not start_time:
+                start_time = '00:00:00'
+            sdate = '%s %s' % (start_date, start_time)
         else:
-             sdate = None
+            sdate = None
 
         if expirationDay and expirationMo and expirationYear and stop_time:
-             edate = '%s-%s-%s %s %s' % (expirationDay, expirationMo,
+            edate = '%s-%s-%s %s %s' % (expirationDay, expirationMo,
                                          expirationYear, stop_time, stopAMPM)
         elif end_date:
-             if not stop_time:
-                 stop_time = '00:00:00'
-             edate = '%s %s' % (end_date, stop_time)
+            if not stop_time:
+                stop_time = '00:00:00'
+            edate = '%s %s' % (end_date, stop_time)
         else:
-             edate = None
+            edate = None
 
         if sdate and edate:
-             if edate < sdate:
-                 edate = sdate
-             self.setStartDate(sdate)
-             self.setEndDate(edate)
+            if edate < sdate:
+                edate = sdate
+            self.setStartDate(sdate)
+            self.setEndDate(edate)
 
         self.update(title=title, description=description, eventType=eventType,
                      location=location, contactName=contact_name,
@@ -483,21 +483,21 @@ class RegisterableEvent(ATFolder, ConstrainTypesMixin, CalendarSupportMixin, His
         rendDate = REQUEST.get('endDate', None)
 
         if rendDate:
-             end = DateTime(rendDate)
+            end = DateTime(rendDate)
         else:
-             end = self.end()
+            end = self.end()
         if rstartDate:
-             start = DateTime(rstartDate)
+            start = DateTime(rstartDate)
         else:
-             start = self.start()
+            start = self.start()
 
         if start > end:
-             errors['endDate'] = "End date must be after start date"
+            errors['endDate'] = "End date must be after start date"
 
     def _start_date(self):
         value = self['startDate']
         if value is None:
-             value = self['creation_date']
+            value = self['creation_date']
         return DT2dt(value)
 
     security.declareProtected(CMFCorePermissions.View, 'start_date')
@@ -506,7 +506,7 @@ class RegisterableEvent(ATFolder, ConstrainTypesMixin, CalendarSupportMixin, His
     def _end_date(self):
         value = self['endDate']
         if value is None:
-             return self.start_date
+            return self.start_date
         return DT2dt(value)
 
     security.declareProtected(CMFCorePermissions.View, 'end_date')
@@ -527,15 +527,15 @@ class RegisterableEvent(ATFolder, ConstrainTypesMixin, CalendarSupportMixin, His
         In all other cases there is no specific order
         """
         if IATEvent.isImplementedBy(other):
-             return cmp((self.start_date, self.duration, self.Title()),
+            return cmp((self.start_date, self.duration, self.Title()),
                         (other.start_date, other.duration, other.Title()))
         #elif isinstance(other, (int, long, float)):
         #     return cmp(self.duration, other)
         elif isinstance(other, DateTime):
-             return cmp(self.start(), other)
+            return cmp(self.start(), other)
         else:
-             # XXX come up with a nice cmp for types
-             return cmp(self.Title(), other)
+            # XXX come up with a nice cmp for types
+            return cmp(self.Title(), other)
 
     def __hash__(self):
         return hash((self.start_date, self.duration, self.title))
@@ -546,10 +546,10 @@ class RegisterableEvent(ATFolder, ConstrainTypesMixin, CalendarSupportMixin, His
         # we handle gracefully
         info = {}
         if event is not None:
-             for field in event.Schema().fields():
-                 info[field.getName()] = event[field.getName()]
+            for field in event.Schema().fields():
+                info[field.getName()] = event[field.getName()]
         elif kwargs:
-             info = kwargs
+            info = kwargs
         ATCTContent.update(self, **info)
 
 registerType(RegisterableEvent, config.PROJECTNAME)
