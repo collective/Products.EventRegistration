@@ -5,7 +5,7 @@ An event registration system for Plone. Provides ``Registrant`` and ``Registerab
 
 .. Note::
 
-    This version of EventRegistration (1.0.x) may be incompatible with previous versions, which replaced the default ATEvent. In this version, a separate RegisterableEvent type is provided. Also the custom workflows that ship with EventRegistration are disabled by default.
+    This version of EventRegistration (1.0.x) may be incompatible with previous versions, which replaced the default ATEvent. In this version, a separate RegisterableEvent type is provided. Also, the custom workflows that ship with with this version of EventRegistration are disabled by default.
 
 Installation
 ------------
