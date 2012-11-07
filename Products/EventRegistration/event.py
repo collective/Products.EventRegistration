@@ -94,11 +94,11 @@ RegisterableEventSchema = ATContentTypeSchema.copy() + ConstrainTypesMixinSchema
              default_method=DateTime,
              languageIndependent=True,
              widget = CalendarWidget(
-             	description= "",
-             	description_msgid = "help_event_start",
-             	label="Event Starts",
-             	label_msgid = "label_event_start",
-             	i18n_domain = "plone",
+                 description= "",
+                 description_msgid = "help_event_start",
+                 label="Event Starts",
+                 label_msgid = "label_event_start",
+                 i18n_domain = "plone",
              ),
         ),
 
@@ -106,8 +106,8 @@ RegisterableEventSchema = ATContentTypeSchema.copy() + ConstrainTypesMixinSchema
              default = False,
              searchable = False,
              widget = BooleanWidget(
-             	label = 'Do not display event hours',
-             	description = 'Check this box if no hours should be displayed for this event',
+                 label = 'Do not display event hours',
+                 description = 'Check this box if no hours should be displayed for this event',
              ),
         ),
 
@@ -119,11 +119,11 @@ RegisterableEventSchema = ATContentTypeSchema.copy() + ConstrainTypesMixinSchema
              default_method=DateTime,
              languageIndependent=True,
              widget = CalendarWidget(
-             	description = "",
-             	description_msgid = "help_event_end",
-             	label = "Event Ends",
-             	label_msgid = "label_event_end",
-             	i18n_domain = "plone",
+                 description = "",
+                 description_msgid = "help_event_end",
+                 label = "Event Ends",
+                 label_msgid = "label_event_end",
+                 i18n_domain = "plone",
              ),
         ),
 
@@ -131,20 +131,20 @@ RegisterableEventSchema = ATContentTypeSchema.copy() + ConstrainTypesMixinSchema
              default = False,
              searchable = False,
              widget = BooleanWidget(
-             	label = 'Do not display an end date for this event',
-             	label_msgid = 'label_event_ignore_end',
-             	description = 'Check this box if no end date should be displayed for this event',
-             	description_msgid = 'help_event_ignore_end',
+                 label = 'Do not display an end date for this event',
+                 label_msgid = 'label_event_ignore_end',
+                 description = 'Check this box if no end date should be displayed for this event',
+                 description_msgid = 'help_event_ignore_end',
              ),
         ),
 
         BooleanField('use_schedule_note',
-             	default = False,
-             	searchable = False,
-             	widget = BooleanWidget(
-             		label = 'Include a schedule note?',
-             		description = 'Check this box, and fill in the blank below, to include a special note regarding this event\'s scheduling.'
-             	),
+                 default = False,
+                 searchable = False,
+                 widget = BooleanWidget(
+                     label = 'Include a schedule note?',
+                     description = 'Check this box, and fill in the blank below, to include a special note regarding this event\'s scheduling.'
+                 ),
              ),
 
         ReferenceField('location',
@@ -153,11 +153,11 @@ RegisterableEventSchema = ATContentTypeSchema.copy() + ConstrainTypesMixinSchema
              relationship = 'Location',
              multiValued = False,
              widget = ReferenceBrowserWidget(
-             	description = "",
-             	description_msgid = "help_event_location",
-             	label = "Event Location",
-             	label_msgid = "label_event_location",
-             	i18n_domain = "plone",
+                 description = "",
+                 description_msgid = "help_event_location",
+                 label = "Event Location",
+                 label_msgid = "label_event_location",
+                 i18n_domain = "plone",
              ),
         ),
 
@@ -172,13 +172,13 @@ RegisterableEventSchema = ATContentTypeSchema.copy() + ConstrainTypesMixinSchema
              # default_output_type = 'text/x-html-safe',
              # allowable_content_types = zconf.ATEvent.allowed_content_types,
              widget = RichWidget(
-             	description = "",
-             	description_msgid = "help_event_announcement",
-             	label = "Event Announcement",
-             	label_msgid = "label_event_announcement",
-             	rows = 25,
-             	i18n_domain = "plone",
-             	allow_file_upload = zconf.ATDocument.allow_document_upload,
+                 description = "",
+                 description_msgid = "help_event_announcement",
+                 label = "Event Announcement",
+                 label_msgid = "label_event_announcement",
+                 rows = 25,
+                 i18n_domain = "plone",
+                 allow_file_upload = zconf.ATDocument.allow_document_upload,
              ),
         ),
 
@@ -195,12 +195,12 @@ RegisterableEventSchema = ATContentTypeSchema.copy() + ConstrainTypesMixinSchema
              vocabulary = 'getEventTypes',
              languageIndependent=True,
              widget = MultiSelectionWidget(
-             	size = 6,
-             	description="",
-             	description_msgid = "help_event_type",
-             	label = "Event Type(s)",
-             	label_msgid = "label_event_type",
-             	i18n_domain = "plone",
+                 size = 6,
+                 description="",
+                 description_msgid = "help_event_type",
+                 label = "Event Type(s)",
+                 label_msgid = "label_event_type",
+                 i18n_domain = "plone",
              ),
         ),
 
@@ -211,12 +211,12 @@ RegisterableEventSchema = ATContentTypeSchema.copy() + ConstrainTypesMixinSchema
              write_permission = ChangeEvents,
              validators = ('isURL',),
              widget = StringWidget(
-             	description = ("Web address with more info about the event. "
-             	"Add http:// for external links."),
-             	description_msgid = "help_url",
-             	label = "Event URL",
-             	label_msgid = "label_url",
-             	i18n_domain = "plone",
+                 description = ("Web address with more info about the event. "
+                 "Add http:// for external links."),
+                 description_msgid = "help_url",
+                 label = "Event URL",
+                 label_msgid = "label_url",
+                 i18n_domain = "plone",
              ),
         ),
 
@@ -226,11 +226,11 @@ RegisterableEventSchema = ATContentTypeSchema.copy() + ConstrainTypesMixinSchema
              accessor='contact_name',
              write_permission = ChangeEvents,
              widget = StringWidget(
-             	description = "",
-             	description_msgid = "help_contact_name",
-             	label = "Contact Name",
-             	label_msgid = "label_contact_name",
-             	i18n_domain = "plone",
+                 description = "",
+                 description_msgid = "help_contact_name",
+                 label = "Contact Name",
+                 label_msgid = "label_contact_name",
+                 i18n_domain = "plone",
              ),
         ),
 
@@ -241,11 +241,11 @@ RegisterableEventSchema = ATContentTypeSchema.copy() + ConstrainTypesMixinSchema
              write_permission = ChangeEvents,
              validators = ('isEmail',),
              widget = StringWidget(
-             	description = "",
-             	description_msgid = "help_contact_email",
-             	label = "Contact E-mail",
-             	label_msgid = "label_contact_email",
-             	i18n_domain = "plone",
+                 description = "",
+                 description_msgid = "help_contact_email",
+                 label = "Contact E-mail",
+                 label_msgid = "label_contact_email",
+                 i18n_domain = "plone",
              ),
         ),
 
@@ -259,11 +259,11 @@ RegisterableEventSchema = ATContentTypeSchema.copy() + ConstrainTypesMixinSchema
              #validators = ('isInternationalPhoneNumber',),
              validators= (),
              widget = StringWidget(
-             	description = "",
-             	description_msgid = "help_contact_phone",
-             	label = "Contact Phone",
-             	label_msgid = "label_contact_phone",
-             	i18n_domain = "plone"
+                 description = "",
+                 description_msgid = "help_contact_phone",
+                 label = "Contact Phone",
+                 label_msgid = "label_contact_phone",
+                 i18n_domain = "plone"
              ),
         ),
 
@@ -271,10 +271,10 @@ RegisterableEventSchema = ATContentTypeSchema.copy() + ConstrainTypesMixinSchema
              schemata = 'Registration',
              default = True,
              widget = BooleanWidget(
-             	label = 'Handle Registration?',
-             	label_msgid = 'label_event_handle_registration',
-             	description = 'Allow people to register for this event',
-             	description_msgid = 'help_event_handle_registration',
+                 label = 'Handle Registration?',
+                 label_msgid = 'label_event_handle_registration',
+                 description = 'Allow people to register for this event',
+                 description_msgid = 'help_event_handle_registration',
              ),
         ),
 
@@ -282,10 +282,10 @@ RegisterableEventSchema = ATContentTypeSchema.copy() + ConstrainTypesMixinSchema
              schemata = 'Registration',
              default = True,
              widget = BooleanWidget(
-             	label = 'Send Confirmation Email',
-             	label_msgid = 'label_event_send_confirmation_email',
-             	description = 'Send a confirmation email when a person registers',
-             	description_msgid = 'help_event_send_confirmation_email',
+                 label = 'Send Confirmation Email',
+                 label_msgid = 'label_event_send_confirmation_email',
+                 description = 'Send a confirmation email when a person registers',
+                 description_msgid = 'help_event_send_confirmation_email',
              ),
         ),
 
@@ -295,8 +295,8 @@ RegisterableEventSchema = ATContentTypeSchema.copy() + ConstrainTypesMixinSchema
              searchable = False,
              required = False,
              widget = StringWidget(
-             	label = 'Registry Email',
-             	description = 'Notice is sent to this address each time a person registers for an event.  (No notice is sent if left blank.)'
+                 label = 'Registry Email',
+                 description = 'Notice is sent to this address each time a person registers for an event.  (No notice is sent if left blank.)'
              ),
     ), 
 
@@ -306,10 +306,10 @@ RegisterableEventSchema = ATContentTypeSchema.copy() + ConstrainTypesMixinSchema
              searchable = False,
              required = True,
              widget = TextAreaWidget(
-             	label = 'Message to registrant',
-             	label_msgid = 'label_event_confirmation_email_body',
-             	description = 'Body of email message sent to each person who registers',
-             	description_msgid = 'help_event_confirmation_email_body',
+                 label = 'Message to registrant',
+                 label_msgid = 'label_event_confirmation_email_body',
+                 description = 'Body of email message sent to each person who registers',
+                 description_msgid = 'help_event_confirmation_email_body',
              ),
         ),
 
@@ -373,14 +373,14 @@ class RegisterableEvent(ATFolder, ConstrainTypesMixin, CalendarSupportMixin, His
     assocMimetypes = ()
     assocFileExt   = ('event', )
     cmf_edit_kws   = ('effectiveDay', 'effectiveMo', 'effectiveYear',
-             		  'expirationDay', 'expirationMo', 'expirationYear',
-             		  'start_time', 'startAMPM', 'stop_time', 'stopAMPM',
-             		  'start_date', 'end_date', 'contact_name', 'contact_email',
-             		  'contact_phone', 'event_url')
+                       'expirationDay', 'expirationMo', 'expirationYear',
+                       'start_time', 'startAMPM', 'stop_time', 'stopAMPM',
+                       'start_date', 'end_date', 'contact_name', 'contact_email',
+                       'contact_phone', 'event_url')
 
     #__implements__ = (ATCTContent.__implements__, IATEvent,
-    #         		  CalendarSupportMixin.__implements__,
-    #         		  HistoryAwareMixin.__implements__)
+    #                   CalendarSupportMixin.__implements__,
+    #                   HistoryAwareMixin.__implements__)
 
     security       = ClassSecurityInfo()
 
@@ -444,34 +444,34 @@ class RegisterableEvent(ATFolder, ConstrainTypesMixin, CalendarSupportMixin, His
 
         if effectiveDay and effectiveMo and effectiveYear and start_time:
              sdate = '%s-%s-%s %s %s' % (effectiveDay, effectiveMo, effectiveYear,
-             							 start_time, startAMPM)
+                                          start_time, startAMPM)
         elif start_date:
              if not start_time:
-             	start_time = '00:00:00'
+                 start_time = '00:00:00'
              sdate = '%s %s' % (start_date, start_time)
         else:
              sdate = None
 
         if expirationDay and expirationMo and expirationYear and stop_time:
              edate = '%s-%s-%s %s %s' % (expirationDay, expirationMo,
-             							expirationYear, stop_time, stopAMPM)
+                                         expirationYear, stop_time, stopAMPM)
         elif end_date:
              if not stop_time:
-             	stop_time = '00:00:00'
+                 stop_time = '00:00:00'
              edate = '%s %s' % (end_date, stop_time)
         else:
              edate = None
 
         if sdate and edate:
              if edate < sdate:
-             	edate = sdate
+                 edate = sdate
              self.setStartDate(sdate)
              self.setEndDate(edate)
 
         self.update(title=title, description=description, eventType=eventType,
-             		location=location, contactName=contact_name,
-             		contactEmail=contact_email, contactPhone=contact_phone,
-             		eventUrl=event_url)
+                     location=location, contactName=contact_name,
+                     contactEmail=contact_email, contactPhone=contact_phone,
+                     eventUrl=event_url)
 
     security.declareProtected(CMFCorePermissions.View, 'post_validate')
     def post_validate(self, REQUEST=None, errors=None):
@@ -528,7 +528,7 @@ class RegisterableEvent(ATFolder, ConstrainTypesMixin, CalendarSupportMixin, His
         """
         if IATEvent.isImplementedBy(other):
              return cmp((self.start_date, self.duration, self.Title()),
-             		   (other.start_date, other.duration, other.Title()))
+                        (other.start_date, other.duration, other.Title()))
         #elif isinstance(other, (int, long, float)):
         #     return cmp(self.duration, other)
         elif isinstance(other, DateTime):
@@ -547,7 +547,7 @@ class RegisterableEvent(ATFolder, ConstrainTypesMixin, CalendarSupportMixin, His
         info = {}
         if event is not None:
              for field in event.Schema().fields():
-             	info[field.getName()] = event[field.getName()]
+                 info[field.getName()] = event[field.getName()]
         elif kwargs:
              info = kwargs
         ATCTContent.update(self, **info)
