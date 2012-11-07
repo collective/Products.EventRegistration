@@ -16,9 +16,9 @@
  <property name="filter_content_types">True</property>
  <property name="allowed_content_types"/>
  <property name="allow_discussion">False</property>
- <property name="default_view">event_view</property>
+ <property name="default_view">registrant_view</property>
  <property name="view_methods">
-  <element value="event_view"/>
+  <element value="registrant_view"/>
  </property>
  <property name="default_view_fallback">False</property>
  <alias from="(Default)" to="(dynamic view)"/>
