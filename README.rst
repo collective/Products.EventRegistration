@@ -3,6 +3,10 @@ Introduction
 
 An event registration system for Plone. Provides ``Registrant`` and ``RegisterableEvent`` content types (using old-style content type framework: Archetypes) and corresponding workflows and associated ``portal_properties`` property sheet.
 
+.. Note::
+
+    This version of EventRegistration (1.0.x) may be incompatible with previous versions, which replaced the default ATEvent. In this version, a separate RegisterableEvent type is provided. Also the custom workflows that ship with EventRegistration are disabled by default.
+
 Installation
 ------------
 
