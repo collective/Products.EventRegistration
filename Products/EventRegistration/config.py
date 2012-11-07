@@ -16,59 +16,36 @@
 # EventRegistration; if not, write to the Free Software Foundation, Inc., 59
 # Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-
-#from Products.CMFCore.CMFCorePermissions import AddPortalContent
 from Products.Archetypes.public import DisplayList
-
 try: # New CMF  
     from Products.CMFCore import permissions as CMFCorePermissions
 except ImportError: # Old CMF  
     from Products.CMFCore import CMFCorePermissions
 
+
 ADD_CONTENT_PERMISSION = CMFCorePermissions.AddPortalContent
 PROJECTNAME = "EventRegistration"
 SKINS_DIR = 'skins'
 PROPSHEET_NAME = 'event_registration_properties'
-
-DEPENDENCIES = [
-#    'GeoLocation',
-]
-
-#
 # List of roles that are allowed to create (and edit) Registrant objects.
 # Comment out one or another, depending on your needs.
-#
-#
-# Allow anonymous registration
-#
 WHO_CAN_REGISTER = ('Manager', 'Member', 'Anonymous')
-#
-# Only allow member registration
-#
-#WHO_CAN_REGISTER = ('Manager', 'Member')
-
-
 EVENT_LOCATIONS = [
     'Auditorium',
     'Conference Room 1',
     'Conference Room 2',
 ]
-
 HONORIFICS = [
     'Mr',
     'Ms',
     'Dr',
     'Prof',
     ]
-
 DEFAULT_MAX_PARTICIPANTS = 100
-
 SHORT_DAY_FORMAT = '%e %b %Y'
 LONG_DAY_FORMAT = '%A %e %B %Y'
 HOUR_FORMAT = '%I:%M%p'
-
 FROM_NAME = 'Event registration system'
-
 MESSAGE_TO_REGISTRANT = '''\
 Dear %(first_name)s %(last_name)s:
     
@@ -93,5 +70,4 @@ Best regards,
 The %(website_title)s team
 %(website_url)s
 '''
-
-GLOBALS = globals()
+#GLOBALS = globals()

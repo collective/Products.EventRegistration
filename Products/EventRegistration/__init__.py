@@ -25,14 +25,14 @@ from Products.CMFCore.DirectoryView import registerDirectory
 
 from Products.EventRegistration import config
 
-#import workflows # sufficient for initialization
 
-registerDirectory(config.SKINS_DIR, config.GLOBALS)
+#import workflows # sufficient for initialization
+#registerDirectory(config.SKINS_DIR, config.GLOBALS)
 
 
 def initialize(context):
 
-    from Products.EventRegistration import event
+    from Products.EventRegistration import registerable_event
     from Products.EventRegistration import registrant
 
     content_types, constructors, ftis = process_types(
