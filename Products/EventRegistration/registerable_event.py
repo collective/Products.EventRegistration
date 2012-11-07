@@ -259,7 +259,7 @@ RegisterableEventSchema = ATContentTypeSchema.copy() + Schema(
 finalizeATCTSchema(RegisterableEventSchema)
 
 
-class RegisterableEvent(base.ATCTContent):
+class RegisterableEvent(base.ATCTBTreeFolder):
     """Information about an upcoming event, which can be displayed in the calendar."""
 
     def shortDayFormat(self):
