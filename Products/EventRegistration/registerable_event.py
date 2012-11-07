@@ -59,7 +59,7 @@ from Products.ATContentTypes.content import base
 from Products.ATContentTypes.lib.constraintypes import ConstrainTypesMixinSchema
 
 
-RegisterableEventSchema = ATContentTypeSchema.copy() + ConstraingTypesMixinSchema + Schema(
+RegisterableEventSchema = ATContentTypeSchema.copy() + ConstrainTypesMixinSchema + Schema(
 (
     DateTimeField('startDate',
              required=True,
