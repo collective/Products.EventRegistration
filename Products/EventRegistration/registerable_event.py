@@ -295,13 +295,13 @@ class RegisterableEvent(base.ATCTContent):
     def getDefaultRegistryContact(self):
         return getPropSheet(self).default_registry_contact
 
+    security = ClassSecurityInfo()
+    security.declareProtected(CMFCorePermissions.View, 'getEventTypes')
     def getEventTypes(self):
         """fetch a list of the available event types from the vocabulary
         """
         return self.portal_catalog.uniqueValuesFor('Subject')
 
     schema = RegisterableEventSchema
-    security = ClassSecurityInfo()
-    security.declareProtected(CMFCorePermissions.View, 'getEventTypes')
 
 registerType(RegisterableEvent, config.PROJECTNAME)
