@@ -83,6 +83,10 @@ from Products.ATContentTypes.lib.constraintypes import ConstrainTypesMixinSchema
 from Products.ATContentTypes.permission import ChangeEvents
 from Products.ATContentTypes.utils import DT2dt
 
+
+from Products.ATContentTypes.content import base
+
+
 RegisterableEventSchema = ATContentTypeSchema.copy() + ConstrainTypesMixinSchema.copy() + Schema(
     (
 
@@ -234,38 +238,38 @@ RegisterableEventSchema = ATContentTypeSchema.copy() + ConstrainTypesMixinSchema
              ),
         ),
 
-    StringField('contactEmail',
-             required=False,
-             searchable=True,
-             accessor='contact_email',
-             write_permission = ChangeEvents,
-             validators = ('isEmail',),
-             widget = StringWidget(
-                 description = "",
-                 description_msgid = "help_contact_email",
-                 label = "Contact E-mail",
-                 label_msgid = "label_contact_email",
-                 i18n_domain = "plone",
-             ),
-        ),
+        StringField('contactEmail',
+                 required=False,
+                 searchable=True,
+                 accessor='contact_email',
+                 write_permission = ChangeEvents,
+                 validators = ('isEmail',),
+                 widget = StringWidget(
+                     description = "",
+                     description_msgid = "help_contact_email",
+                     label = "Contact E-mail",
+                     label_msgid = "label_contact_email",
+                     i18n_domain = "plone",
+                 ),
+            ),
 
-    StringField('contactPhone',
-             required=False,
-             searchable=True,
-             accessor='contact_phone',
-             write_permission = ChangeEvents,
-             # XXX disabled for now, see
-             # https://sourceforge.net/tracker/index.php?func=detail&aid=974102&group_id=55262&atid=645337
-             #validators = ('isInternationalPhoneNumber',),
-             validators= (),
-             widget = StringWidget(
-                 description = "",
-                 description_msgid = "help_contact_phone",
-                 label = "Contact Phone",
-                 label_msgid = "label_contact_phone",
-                 i18n_domain = "plone"
-             ),
-        ),
+        StringField('contactPhone',
+                 required=False,
+                 searchable=True,
+                 accessor='contact_phone',
+                 write_permission = ChangeEvents,
+                 # XXX disabled for now, see
+                 # https://sourceforge.net/tracker/index.php?func=detail&aid=974102&group_id=55262&atid=645337
+                 #validators = ('isInternationalPhoneNumber',),
+                 validators= (),
+                 widget = StringWidget(
+                     description = "",
+                     description_msgid = "help_contact_phone",
+                     label = "Contact Phone",
+                     label_msgid = "label_contact_phone",
+                     i18n_domain = "plone"
+                 ),
+            ),
 
         BooleanField('handle_registration',
              schemata = 'Registration',
@@ -298,7 +302,7 @@ RegisterableEventSchema = ATContentTypeSchema.copy() + ConstrainTypesMixinSchema
                  label = 'Registry Email',
                  description = 'Notice is sent to this address each time a person registers for an event.  (No notice is sent if left blank.)'
              ),
-    ), 
+        ), 
 
         TextField('confirmation_email_body',
              schemata = 'Registration',
@@ -312,14 +316,13 @@ RegisterableEventSchema = ATContentTypeSchema.copy() + ConstrainTypesMixinSchema
                  description_msgid = 'help_event_confirmation_email_body',
              ),
         ),
-
-
     ), marshall = RFC822Marshaller()
 )
 
 finalizeATCTSchema(RegisterableEventSchema)
 
-class RegisterableEvent(ATFolder, ConstrainTypesMixin, CalendarSupportMixin, HistoryAwareMixin):
+#class RegisterableEvent(ATFolder, ConstrainTypesMixin, CalendarSupportMixin, HistoryAwareMixin):
+class RegisterableEvent(base.ATCTContent):
     """Information about an upcoming event, which can be displayed in the calendar."""
 
     # Get time format strings from property sheet

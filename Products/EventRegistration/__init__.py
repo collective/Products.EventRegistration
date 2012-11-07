@@ -32,8 +32,8 @@ registerDirectory(config.SKINS_DIR, config.GLOBALS)
 
 def initialize(context):
 
-    #from Products.EventRegistration import event
-    #from Products.EventRegistration import registrant
+    from Products.EventRegistration import event
+    from Products.EventRegistration import registrant
 
     content_types, constructors, ftis = process_types(
             listTypes(config.PROJECTNAME),

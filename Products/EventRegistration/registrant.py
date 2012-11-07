@@ -29,7 +29,7 @@ from Products.Archetypes.public import SelectionWidget
 from Products.Archetypes.public import TextAreaWidget 
 from Products.Archetypes.public import BooleanField 
 from Products.Archetypes.public import BooleanWidget
-from Products.Archetypes.public import BaseContent
+#from Products.Archetypes.public import BaseContent
 from Products.Archetypes.public import registerType
 from Products.Archetypes.TemplateMixin import TemplateMixin
 #from Products.CMFCore import CMFCorePermissions
@@ -49,6 +49,9 @@ from Products.EventRegistration.utils import getPropSheet
 # debugging needs
 from Products.Archetypes.debug import log
 from pprint import pformat
+
+
+from Products.ATContentTypes.content import base
 
 
 # Initialize security manager
@@ -174,7 +177,7 @@ schema = BaseSchema.copy() + Schema((
 ))
 
 
-class Registrant(BaseContent):
+class Registrant(base.ATCTContent):
     """
     A person who has registered to participate in an Event
     """
