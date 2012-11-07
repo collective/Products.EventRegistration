@@ -16,25 +16,18 @@
 # EventRegistration; if not, write to the Free Software Foundation, Inc., 59
 # Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-''' product initialization '''
-
 from Products.Archetypes.public import process_types
 from Products.Archetypes.public import listTypes
 from Products.CMFCore.utils import ContentInit
-from Products.CMFCore.DirectoryView import registerDirectory
-
 from Products.EventRegistration import config
-
-
-#import workflows # sufficient for initialization
-#registerDirectory(config.SKINS_DIR, config.GLOBALS)
+from Products.EventRegistration import registerable_event
+from Products.EventRegistration import registrant
 
 
 def initialize(context):
-
-    from Products.EventRegistration import registerable_event
-    from Products.EventRegistration import registrant
-
+    """
+    Create content types
+    """
     content_types, constructors, ftis = process_types(
             listTypes(config.PROJECTNAME),
             config.PROJECTNAME
