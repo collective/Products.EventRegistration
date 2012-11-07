@@ -55,12 +55,12 @@ from Products.ATContentTypes.content import base
 
 
 # Initialize security manager
-security = ClassSecurityInfo()
+security=ClassSecurityInfo()
 
-schema = BaseSchema.copy() + Schema((
+schema=BaseSchema.copy() + Schema((
     StringField('id',
         widget=StringWidget(
-            visible = {
+            visible={
                  'edit'  : 'hidden',
                  'view'  : 'hidden',
             }
@@ -68,7 +68,7 @@ schema = BaseSchema.copy() + Schema((
     ),
     StringField('title',
         widget=StringWidget(
-            visible = {
+            visible={
                  'edit'  : 'hidden',
                  'view'  : 'hidden',
             }
@@ -76,102 +76,102 @@ schema = BaseSchema.copy() + Schema((
         accessor='Title',
     ),
     StringField('honorific',
-        required = True,
-        searchable = False,
-        vocabulary = 'HonorificsList',
-        widget = SelectionWidget(
+        required=True,
+        searchable=False,
+        vocabulary='HonorificsList',
+        widget=SelectionWidget(
             label='Title',
-            format = 'select',
+            format='select',
         ),
     ),
     StringField(
         'first_name',
-        required = True,
-        searchable = False,
-        widget = StringWidget(label = 'First Name'),
+        required=True,
+        searchable=False,
+        widget=StringWidget(label='First Name'),
     ),
     StringField(
         'last_name',
-        required = True,
-        searchable = False,
-        widget = StringWidget(label = 'Last Name'),
+        required=True,
+        searchable=False,
+        widget=StringWidget(label='Last Name'),
     ),
     StringField(
         'company',
-        required = True,
-        searchable = False,
-        widget = StringWidget(label = 'Company'),
+        required=True,
+        searchable=False,
+        widget=StringWidget(label='Company'),
     ),
     StringField(
         'job_title',
-        required = True,
-        searchable = False,
-        widget = StringWidget(label = 'Job Title'),
+        required=True,
+        searchable=False,
+        widget=StringWidget(label='Job Title'),
     ),
     StringField(
         'email',
-        required = True,
-        searchable = False,
-        validator = 'isEmail',
-        widget = StringWidget(label = 'Email Address'),
+        required=True,
+        searchable=False,
+        validator='isEmail',
+        widget=StringWidget(label='Email Address'),
     ),
     StringField(
         'phone',
-        required = False,
-        searchable = False,
-        widget = StringWidget(label = 'Telephone Number'),
+        required=False,
+        searchable=False,
+        widget=StringWidget(label='Telephone Number'),
     ),
     StringField(
         'street',
-        required = False,
-        searchable = False,
-        widget = StringWidget(label = 'Street Address'),
+        required=False,
+        searchable=False,
+        widget=StringWidget(label='Street Address'),
     ),
     StringField(
         'city',
-        required = False,
-        searchable = False, 
-        widget = StringWidget(label = 'City'),
+        required=False,
+        searchable=False, 
+        widget=StringWidget(label='City'),
     ),
     StringField(
         'state',
-        required = False,
-        searchable = False,
-        widget = StringWidget(label = "State"),
+        required=False,
+        searchable=False,
+        widget=StringWidget(label="State"),
     ),
     StringField(
         'zip',
-        required = False,
-        searchable = False,
-        widget = StringWidget(label = 'Zip Code'),
+        required=False,
+        searchable=False,
+        widget=StringWidget(label='Zip Code'),
     ),
     StringField(
         'website',
-        required = False,
-        searchable = False,
-        widget = StringWidget(label = 'Website'),
+        required=False,
+        searchable=False,
+        widget=StringWidget(label='Website'),
     ),
     StringField(
         'heard_about',
-        required = False,
-        searchable = False,
-        widget = StringWidget(label = 'How did you hear about this event?'),
+        required=False,
+        searchable=False,
+        widget=StringWidget(label='How did you hear about this event?'),
     ),
     StringField(
         'comments',
-        required = False,
-        searchable = False,
-        widget = TextAreaWidget(
-            label = 'Comments  (Please do not sign up other participants.  Each person must register individually.)',
-            rows = 10,
-            cols = 72,
+        required=False,
+        searchable=False,
+        widget=TextAreaWidget(
+            label='Comments  (Please do not sign up other participants.  Each person must register individually.)',
+            rows=10,
+            cols=72,
         ),
     ),
     BooleanField(
         'newsletter',
-        default = False,
-        widget = BooleanWidget(
-            label = 'Yes, I would like to receive a newsletter'
+        default=False,
+        widget=BooleanWidget(
+            label='Yes, I would like to receive a newsletter'
         ),
     ),
 ))
@@ -184,65 +184,38 @@ class Registrant(base.ATCTContent):
 
     schema = schema
 
-    actions = (
-            {
-            'id'           : 'view',
-            'name'         : 'View',
-            'action'       : 'string:${object_url}/registrant_view',
-            'permissions'  : (CMFCorePermissions.View, ),
-            'category'     : 'object',
-            },
-            {
-            'id'           : 'edit',
-            'name'         : 'Edit',
-            'action'       : 'string:${object_url}/base_edit',
-            'permissions'  : (CMFCorePermissions.View, ),
-            'category'     : 'object',
-            },
-            )
-
     def parentTitle(self):
         '''Return the title of the Registrants parent Event'''
-
-        # WTF Someone didn't know about aq_parent? Or I never knew about
-        # self.REQUEST.PARENTS. Or both.
-
-        #out = {}
-        #for parent in self.REQUEST.PARENTS:
-        #    if parent.portal_type == 'Event':
-        #         out = parent.title_or_id()
-        #         break
-
         return self.aq_parent.Title()
 
 
     def Title(self):
         '''automatically generates an appropriate title'''
-        honorific = getattr(self, 'honorific', None)
-        first = getattr(self, 'first_name', None)
-        last = getattr(self, 'last_name', None)
-        company = getattr(self, 'company', None)
+        honorific=getattr(self, 'honorific', None)
+        first=getattr(self, 'first_name', None)
+        last=getattr(self, 'last_name', None)
+        company=getattr(self, 'company', None)
         # The parent of a Registrant should always be an Event
         if honorific and first and last and company:
-            title = '%s, %s %s (%s)' % (last, honorific, first, company)
+            title='%s, %s %s (%s)' % (last, honorific, first, company)
         else:
             # the more informative title makes the pathbar too long (on a 17" screen), so display is uglified
-            title = 'Register for %s' % self.parentTitle()
-            # title = 'Register'
+            title='Register for %s' % self.parentTitle()
+            # title='Register'
         return title
 
     def HonorificsList(self):
         return getDisplayList(self, 'honorifics')
 
     def firstAndLast(self):
-        first = getattr(self, 'first_name', None)
-        last = getattr(self, 'last_name', None)
+        first=getattr(self, 'first_name', None)
+        last=getattr(self, 'last_name', None)
         return '%s %s' % (first, last)
     
     def bothCityAndState(self):
         '''returns true if both city and state are defined -- used to determine if the page template needs a comma'''
-        city = getattr(self, 'city', None)
-        state = getattr(self, 'state', None)
+        city=getattr(self, 'city', None)
+        state=getattr(self, 'state', None)
         if city and state:
             return True
         else:
@@ -255,7 +228,7 @@ class Registrant(base.ATCTContent):
         confirming their registration, and to the event's registry contact with
         registrant's details.
         """
-        propsheet = getPropSheet(self)
+        propsheet=getPropSheet(self)
         if propsheet.confirm_to_registrant:
             self.confirmToRegistrant(request)
         if propsheet.confirm_to_registry_contact:
@@ -266,15 +239,15 @@ class Registrant(base.ATCTContent):
         '''
         Sends a confirmation email to the registrant
         '''
-        portal = getToolByName(self, 'portal_url').getPortalObject()
-        event = self.aq_inner.aq_parent
-        email_from_address = portal.email_from_address
-        propsheet = getPropSheet(self)
-        start_string = event.start_date.strftime(propsheet.long_day_format) # Start day (nicely formatted)
+        portal=getToolByName(self, 'portal_url').getPortalObject()
+        event=self.aq_inner.aq_parent
+        email_from_address=portal.email_from_address
+        propsheet=getPropSheet(self)
+        start_string=event.start_date.strftime(propsheet.long_day_format) # Start day (nicely formatted)
         if not event.ignore_hours: 
             start_string += ', ' + event.start_date.strftime(propsheet.hour_format)
         # these are the vars that can be accessed using %(varname)s in propsheet.message_to_registrant
-        messagevars = { 
+        messagevars={ 
             'first_name': self.first_name,
             'last_name': self.last_name,
             'event_title': event.title, # Event title
@@ -285,8 +258,8 @@ class Registrant(base.ATCTContent):
             'website_url': portal.absolute_url(), # URL for the website
         }
         # Compose the message
-        mailfrom = email.Utils.formataddr((propsheet.from_name, getattr(propsheet, 'from_address', email_from_address)))
-        mailto = email.Utils.formataddr((self.getFirst_name() + ' ' + self.getLast_name(), self.getEmail()))
+        mailfrom  =  email.Utils.formataddr((propsheet.from_name, getattr(propsheet, 'from_address', email_from_address)))
+        mailto  =  email.Utils.formataddr((self.getFirst_name() + ' ' + self.getLast_name(), self.getEmail()))
         subject = 'Registration confirmation for "' + event.title + '".'
         body = self.confirmation_email_body % messagevars
         message = MIMEText(body)
@@ -317,19 +290,19 @@ class Registrant(base.ATCTContent):
         mailto = email.Utils.formataddr(("Events Registry", registry_contact))
         subject = 'Registration :: ' + fullname + ' :: ' + event.title
         body = ''
-        body += 'First Name:     %s\n' % self.first_name
-        body += 'Last Name:      %s\n' % self.last_name
-        body += 'Company:        %s\n' % self.company
-        body += 'Job Title:      %s\n' % self.job_title
-        body += 'Email Address:  %s\n' % self.email
-        body += 'Phone:          %s\n' % self.phone
-        body += 'Address:        %s\n' % self.street
-        body += 'City:           %s\n' % self.city
-        body += 'State:          %s\n' % self.state
-        body += 'Zip:            %s\n' % self.zip
-        body += 'Website:        %s\n' % self.website
-        body += 'Comments:       %s\n' % self.comments
-        body += '\n'
+        body + = 'First Name:     %s\n' % self.first_name
+        body + = 'Last Name:      %s\n' % self.last_name
+        body + = 'Company:        %s\n' % self.company
+        body + = 'Job Title:      %s\n' % self.job_title
+        body + = 'Email Address:  %s\n' % self.email
+        body + = 'Phone:          %s\n' % self.phone
+        body + = 'Address:        %s\n' % self.street
+        body + = 'City:           %s\n' % self.city
+        body + = 'State:          %s\n' % self.state
+        body + = 'Zip:            %s\n' % self.zip
+        body + = 'Website:        %s\n' % self.website
+        body + = 'Comments:       %s\n' % self.comments
+        body + = '\n'
         message = MIMEText(body)
         message['To'] = mailto
         message['From'] = mailfrom
@@ -341,23 +314,6 @@ class Registrant(base.ATCTContent):
         '''
         Returns True if number of people registered for this event is smaller than max_participants
         '''
-        return True # INCOMPLETE
-
-
-#def modify_fti(fti):
-#    '''\
-#    Disable global_allow so users cannot add a Registrant anywhere except inside an Event, where it is explicitly allowed.
-#
-#    Disable references tab.
-#
-#    Use custom view template.
-#    '''
-#    fti['global_allow'] = 0 
-#    for a in fti['actions']:
-#        if a['id'] in ('references', ):
-#            a['visible'] = False
-#        if a['id'] in ('view', ):
-#            a['action'] = 'string:${object_url}/registrant_view'
-#    return fti
+        return True
 
 registerType(Registrant, config.PROJECTNAME)
