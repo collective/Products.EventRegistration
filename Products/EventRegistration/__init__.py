@@ -32,17 +32,17 @@ registerDirectory(config.SKINS_DIR, config.GLOBALS)
 
 def initialize(context):
 
-	from Products.EventRegistration import event
-	from Products.EventRegistration import registrant
+    from Products.EventRegistration import event
+    from Products.EventRegistration import registrant
 
-	content_types, constructors, ftis = process_types( 
-			listTypes(config.PROJECTNAME), 
-			config.PROJECTNAME
-			)
-	ContentInit(
-		 	config.PROJECTNAME + ' Content',
-			content_types      = content_types,
-			permission         = config.ADD_CONTENT_PERMISSION,
-			extra_constructors = constructors,
-			fti                = ftis,
-			).initialize(context)
+    content_types, constructors, ftis = process_types( 
+       	listTypes(config.PROJECTNAME), 
+       	config.PROJECTNAME
+       	)
+    ContentInit(
+        	config.PROJECTNAME + ' Content',
+       	content_types      = content_types,
+       	permission         = config.ADD_CONTENT_PERMISSION,
+       	extra_constructors = constructors,
+       	fti                = ftis,
+       	).initialize(context)

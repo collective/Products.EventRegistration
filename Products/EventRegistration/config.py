@@ -31,7 +31,7 @@ SKINS_DIR = 'skins'
 PROPSHEET_NAME = 'event_registration_properties'
 
 DEPENDENCIES = [
-#	'GeoLocation',
+#    'GeoLocation',
 ]
 
 #
@@ -49,17 +49,17 @@ WHO_CAN_REGISTER = ('Manager', 'Member', 'Anonymous')
 
 
 EVENT_LOCATIONS = [
-	'Auditorium',
-	'Conference Room 1',
-	'Conference Room 2',
+    'Auditorium',
+    'Conference Room 1',
+    'Conference Room 2',
 ]
 
 HONORIFICS = [
-	'Mr',
-	'Ms',
-	'Dr',
-	'Prof',
-	]
+    'Mr',
+    'Ms',
+    'Dr',
+    'Prof',
+    ]
 
 DEFAULT_MAX_PARTICIPANTS = 100
 
@@ -71,7 +71,7 @@ FROM_NAME = 'Event registration system'
 
 MESSAGE_TO_REGISTRANT = '''\
 Dear %(first_name)s %(last_name)s:
-	
+    
 You are confirmed to attend "%(event_title)s".
 
 EVENT BEGINS:

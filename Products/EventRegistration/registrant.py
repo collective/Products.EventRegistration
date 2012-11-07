@@ -57,18 +57,18 @@ security = ClassSecurityInfo()
 schema = BaseSchema.copy() + Schema((
     StringField('id',
         widget=StringWidget(
-        	visible = {
-        		'edit'  : 'hidden',
-        		'view'  : 'hidden',
-        	}
+            visible = {
+                 'edit'  : 'hidden',
+                 'view'  : 'hidden',
+            }
         ),
     ),
     StringField('title',
         widget=StringWidget(
-        	visible = {
-        		'edit'  : 'hidden',
-        		'view'  : 'hidden',
-        	}
+            visible = {
+                 'edit'  : 'hidden',
+                 'view'  : 'hidden',
+            }
         ),
         accessor='Title',
     ),
@@ -77,8 +77,8 @@ schema = BaseSchema.copy() + Schema((
         searchable = False,
         vocabulary = 'HonorificsList',
         widget = SelectionWidget(
-        	label='Title',
-        	format = 'select',
+            label='Title',
+            format = 'select',
         ),
     ),
     StringField(
@@ -159,16 +159,16 @@ schema = BaseSchema.copy() + Schema((
         required = False,
         searchable = False,
         widget = TextAreaWidget(
-        	label = 'Comments  (Please do not sign up other participants.  Each person must register individually.)',
-        	rows = 10,
-        	cols = 72,
+            label = 'Comments  (Please do not sign up other participants.  Each person must register individually.)',
+            rows = 10,
+            cols = 72,
         ),
     ),
     BooleanField(
         'newsletter',
         default = False,
         widget = BooleanWidget(
-        	label = 'Yes, I would like to receive a newsletter'
+            label = 'Yes, I would like to receive a newsletter'
         ),
     ),
 ))
@@ -182,21 +182,21 @@ class Registrant(BaseContent):
     schema = schema
 
     actions = (
-        	{
-        	'id'           : 'view',
-        	'name'         : 'View',
-        	'action'       : 'string:${object_url}/registrant_view',
-        	'permissions'  : (CMFCorePermissions.View, ),
-        	'category'     : 'object',
-        	},
-        	{
-        	'id'           : 'edit',
-        	'name'         : 'Edit',
-        	'action'       : 'string:${object_url}/base_edit',
-        	'permissions'  : (CMFCorePermissions.View, ),
-        	'category'     : 'object',
-        	},
-        	)
+            {
+            'id'           : 'view',
+            'name'         : 'View',
+            'action'       : 'string:${object_url}/registrant_view',
+            'permissions'  : (CMFCorePermissions.View, ),
+            'category'     : 'object',
+            },
+            {
+            'id'           : 'edit',
+            'name'         : 'Edit',
+            'action'       : 'string:${object_url}/base_edit',
+            'permissions'  : (CMFCorePermissions.View, ),
+            'category'     : 'object',
+            },
+            )
 
     def parentTitle(self):
         '''Return the title of the Registrants parent Event'''
@@ -206,9 +206,9 @@ class Registrant(BaseContent):
 
         #out = {}
         #for parent in self.REQUEST.PARENTS:
-        #	if parent.portal_type == 'Event':
-        #		out = parent.title_or_id()
-        #		break
+        #    if parent.portal_type == 'Event':
+        #         out = parent.title_or_id()
+        #         break
 
         return self.aq_parent.Title()
 
@@ -221,11 +221,11 @@ class Registrant(BaseContent):
         company = getattr(self, 'company', None)
         # The parent of a Registrant should always be an Event
         if honorific and first and last and company:
-        	title = '%s, %s %s (%s)' % (last, honorific, first, company)
+            title = '%s, %s %s (%s)' % (last, honorific, first, company)
         else:
-        	# the more informative title makes the pathbar too long (on a 17" screen), so display is uglified
-        	title = 'Register for %s' % self.parentTitle()
-        	# title = 'Register'
+            # the more informative title makes the pathbar too long (on a 17" screen), so display is uglified
+            title = 'Register for %s' % self.parentTitle()
+            # title = 'Register'
         return title
 
     def HonorificsList(self):
@@ -241,9 +241,9 @@ class Registrant(BaseContent):
         city = getattr(self, 'city', None)
         state = getattr(self, 'state', None)
         if city and state:
-        	return True
+            return True
         else:
-        	return False
+            return False
 
     security.declarePublic('sendConfirmationEmail')
     def sendConfirmationEmail(self, request=None):
@@ -254,9 +254,9 @@ class Registrant(BaseContent):
         """
         propsheet = getPropSheet(self)
         if propsheet.confirm_to_registrant:
-        	self.confirmToRegistrant(request)
+            self.confirmToRegistrant(request)
         if propsheet.confirm_to_registry_contact:
-        	self.confirmToRegistryContact(request)
+            self.confirmToRegistryContact(request)
     
     security.declarePublic('confirmToRegistrant')
     def confirmToRegistrant(self, request):
@@ -269,17 +269,17 @@ class Registrant(BaseContent):
         propsheet = getPropSheet(self)
         start_string = event.start_date.strftime(propsheet.long_day_format) # Start day (nicely formatted)
         if not event.ignore_hours: 
-        	start_string += ', ' + event.start_date.strftime(propsheet.hour_format)
+            start_string += ', ' + event.start_date.strftime(propsheet.hour_format)
         # these are the vars that can be accessed using %(varname)s in propsheet.message_to_registrant
         messagevars = { 
-        	'first_name': self.first_name,
-        	'last_name': self.last_name,
-        	'event_title': event.title, # Event title
-        	'event_page': event.absolute_url(), # URL for event's webpage
-        	'event_summary': event.summary,
-        	'event_start': start_string,
-        	'website_title': portal.title, # title of the whole website
-        	'website_url': portal.absolute_url(), # URL for the website
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'event_title': event.title, # Event title
+            'event_page': event.absolute_url(), # URL for event's webpage
+            'event_summary': event.summary,
+            'event_start': start_string,
+            'website_title': portal.title, # title of the whole website
+            'website_url': portal.absolute_url(), # URL for the website
         }
         # Compose the message
         mailfrom = email.Utils.formataddr((propsheet.from_name, getattr(propsheet, 'from_address', email_from_address)))
@@ -305,12 +305,12 @@ class Registrant(BaseContent):
         # Compose the message
         from_adress = propsheet.from_address
         if not from_adress:
-        	from_adress = portal.email_from_address
+            from_adress = portal.email_from_address
         mailfrom = email.Utils.formataddr((propsheet.from_name, from_adress))
         fullname = self.first_name + ' ' + self.last_name
         registry_contact = event.registry_contact
         if not registry_contact:
-        	registry_contact = propsheet.default_registry_contact
+            registry_contact = propsheet.default_registry_contact
         mailto = email.Utils.formataddr(("Events Registry", registry_contact))
         subject = 'Registration :: ' + fullname + ' :: ' + event.title
         body = ''
@@ -352,9 +352,9 @@ class Registrant(BaseContent):
 #    fti['global_allow'] = 0 
 #    for a in fti['actions']:
 #        if a['id'] in ('references', ):
-#        	a['visible'] = False
+#            a['visible'] = False
 #        if a['id'] in ('view', ):
-#        	a['action'] = 'string:${object_url}/registrant_view'
+#            a['action'] = 'string:${object_url}/registrant_view'
 #    return fti
 
 registerType(Registrant, config.PROJECTNAME)

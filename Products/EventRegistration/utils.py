@@ -60,20 +60,20 @@ def getDisplayList(portal, prop_name=None):
 #
 
 class NoPropSheetFound(Exception):
-	'''Exception raised when no property sheet is found for the product.'''
-	pass
+    '''Exception raised when no property sheet is found for the product.'''
+    pass
 
 def getPropSheet(portal, out=None):
-	'''
-	Returns the property sheet for this product (as defined by
-	config.PROPSHEET_NAME).  Throws an exception if the propsheet isnot found.
-	'''
-	if not out: # send debug messages to nowhere
-		out = StringIO() 
-	portal = getToolByName(portal, 'portal_url').getPortalObject()
-	ptool = getToolByName(portal, 'portal_properties')
-	psheet = getattr(ptool, config.PROPSHEET_NAME, None)
-	if psheet:
-		return psheet
-	else:
-		raise NoPropSheetFound
+    '''
+    Returns the property sheet for this product (as defined by
+    config.PROPSHEET_NAME).  Throws an exception if the propsheet isnot found.
+    '''
+    if not out: # send debug messages to nowhere
+        out = StringIO() 
+    portal = getToolByName(portal, 'portal_url').getPortalObject()
+    ptool = getToolByName(portal, 'portal_properties')
+    psheet = getattr(ptool, config.PROPSHEET_NAME, None)
+    if psheet:
+        return psheet
+    else:
+        raise NoPropSheetFound
