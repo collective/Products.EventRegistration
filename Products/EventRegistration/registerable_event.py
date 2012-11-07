@@ -56,9 +56,10 @@ from Products.ATContentTypes.content.schemata import ATContentTypeSchema
 from Products.ATContentTypes.content.schemata import finalizeATCTSchema
 from Products.ATContentTypes.permission import ChangeEvents
 from Products.ATContentTypes.content import base
+from Products.ATContentTypes.lib.constraintypes import ConstrainTypesMixinSchema
 
 
-RegisterableEventSchema = ATContentTypeSchema.copy() + Schema(
+RegisterableEventSchema = ATContentTypeSchema.copy() + ConstraingTypesMixinSchema + Schema(
 (
     DateTimeField('startDate',
              required=True,
