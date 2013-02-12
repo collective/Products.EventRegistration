@@ -54,6 +54,7 @@ from pprint import pformat
 from Products.ATContentTypes.content import base
 
 from zope.interface import Interface
+from zope.interface import implements
 
 
 # Initialize security manager
