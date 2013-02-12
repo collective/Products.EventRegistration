@@ -192,7 +192,7 @@ class Registrant(base.ATCTContent):
     """
 
     schema = schema
-    implements(IRegistrant)
+    implements(IEventRegistrant)
 
     def parentTitle(self):
         '''Return the title of the Registrants parent Event'''
