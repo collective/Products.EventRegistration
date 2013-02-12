@@ -15,6 +15,7 @@
         provides="Products.GenericSetup.interfaces.EXTENSION"
         />
 
+    <!-- The order is apparently important here: obj, event -->
     <subscriber for=".registrant.IEventRegistrant Products.Archetypes.interfaces.IObjectInitializedEvent"
         handler=".events.handle_registrant" />
 
