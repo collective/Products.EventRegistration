@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 import os
 
 
-version = '1.0.3'
+version = '1.0.4'
 
 
 setup(name='Products.EventRegistration',
@@ -17,7 +17,7 @@ setup(name='Products.EventRegistration',
         ],
       keywords='plone events',
       author='Jason McVetta',
-      author_email='jmcvetta@squaretortoise.com',
+      author_email='jason.mcvetta@gmail.com',
       maintainer='Alex Clark',
       maintainer_email='aclark@aclark.net',
       url='https://github.com/collective/Products.EventRegistration',
