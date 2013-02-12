@@ -15,4 +15,7 @@
         provides="Products.GenericSetup.interfaces.EXTENSION"
         />
 
+    <subscriber for="Products.Archetypes.interfaces.IObjectInitializedEvent"
+        handler=".events.handle_registrant" />
+
 </configure>
