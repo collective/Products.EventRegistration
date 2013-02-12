@@ -243,16 +243,16 @@ class Registrant(base.ATCTContent):
         event=self.aq_inner.aq_parent
         email_from_address=portal.email_from_address
         propsheet=getPropSheet(self)
-        start_string=event.start_date.strftime(propsheet.long_day_format) # Start day (nicely formatted)
+        start_string=event.startDate.strftime(propsheet.long_day_format) # Start day (nicely formatted)
         if not event.ignore_hours: 
-            start_string += ', ' + event.start_date.strftime(propsheet.hour_format)
+            start_string += ', ' + event.startDate.strftime(propsheet.hour_format)
         # these are the vars that can be accessed using %(varname)s in propsheet.message_to_registrant
         messagevars={ 
             'first_name': self.first_name,
             'last_name': self.last_name,
             'event_title': event.title, # Event title
             'event_page': event.absolute_url(), # URL for event's webpage
-            'event_summary': event.summary,
+            'event_summary': event.Description,
             'event_start': start_string,
             'website_title': portal.title, # title of the whole website
             'website_url': portal.absolute_url(), # URL for the website
@@ -261,7 +261,7 @@ class Registrant(base.ATCTContent):
         mailfrom  =  email.Utils.formataddr((propsheet.from_name, getattr(propsheet, 'from_address', email_from_address)))
         mailto  =  email.Utils.formataddr((self.getFirst_name() + ' ' + self.getLast_name(), self.getEmail()))
         subject = 'Registration confirmation for "' + event.title + '".'
-        body = self.confirmation_email_body % messagevars
+        body = self.confirmation_email_body() % messagevars
         message = MIMEText(body)
         message['To'] = mailto
         message['From'] = mailfrom
