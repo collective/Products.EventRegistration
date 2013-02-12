@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.0.4 - 2013-02-12
+------------------
+
+- Restore event notifications by listening for IObjectModified event
+
 1.0.3 - 2012-11-07
 ------------------
 
