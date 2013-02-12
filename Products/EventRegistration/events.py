@@ -2,6 +2,6 @@
 
 def handle_registrant(self):
     """
-    Do something with self.object
+    Send confirmation emails
     """
     self.object.sendConfirmationEmail(self.object)

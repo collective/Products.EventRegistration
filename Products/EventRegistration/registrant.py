@@ -53,6 +53,8 @@ from pprint import pformat
 
 from Products.ATContentTypes.content import base
 
+from zope.interface import Interface
+
 
 # Initialize security manager
 security=ClassSecurityInfo()
@@ -177,12 +179,19 @@ schema=BaseSchema.copy() + Schema((
 ))
 
 
+class IRegistrant(Interface):
+    """
+    This object is an event registrant
+    """
+
+
 class Registrant(base.ATCTContent):
     """
     A person who has registered to participate in an Event
     """
 
     schema = schema
+    implements(IRegistrant)
 
     def parentTitle(self):
         '''Return the title of the Registrants parent Event'''
