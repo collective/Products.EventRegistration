@@ -1,7 +1,7 @@
 
 
-def handle_registrant(self):
+def handle_registrant(obj, event):
     """
     Send confirmation emails
     """
-    self.object.sendConfirmationEmail(self.object)
+    obj.sendConfirmationEmail(obj)
