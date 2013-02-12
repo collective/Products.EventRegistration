@@ -20,6 +20,7 @@
   <property name="short_day_format" type="string">%e %b %Y</property>
   <property name="long_day_format" type="string">%A %e %B %Y</property>
   <property name="confirm_to_registrant" type="boolean">True</property>
+  <property name="confirm_to_registry_contact" type="boolean">True</property>
   <property name="message_to_registrant" type="string">
    <element value="Dear %(first_name)s %(last_name)s:"/>
    <element value="	"/>
