@@ -180,7 +180,7 @@ schema=BaseSchema.copy() + Schema((
 ))
 
 
-class IRegistrant(Interface):
+class IEventRegistrant(Interface):
     """
     This object is an event registrant
     """
